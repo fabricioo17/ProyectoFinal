@@ -15,5 +15,8 @@ public class Main {
          nuevo.imprimirTablero();
 
 nuevo.elegirMovimiento(teclado);
+nuevo.imprimirTablero();
+nuevo.elegirMovimiento(teclado);
+nuevo.imprimirTablero();
     }
 }
