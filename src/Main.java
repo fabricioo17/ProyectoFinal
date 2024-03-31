@@ -10,13 +10,16 @@ public class Main {
     public static void main(String[] args) {
         Scanner teclado= new Scanner(System.in);
          Tablero nuevo = new Tablero();
-
+int i =0;
          nuevo.StartTablero();
          nuevo.imprimirTablero();
-
-nuevo.elegirMovimiento(teclado);
-nuevo.imprimirTablero();
-nuevo.elegirMovimiento(teclado);
-nuevo.imprimirTablero();
+do {
+    nuevo.elegirMovimiento(teclado);
+    nuevo.imprimirTablero();
+    nuevo.elegirMovimiento(teclado);
+    nuevo.imprimirTablero();
+i++;
+}
+while (i<10);
     }
 }

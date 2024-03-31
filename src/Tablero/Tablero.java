@@ -15,7 +15,7 @@ public class Tablero {
     private Caballo caballo;
     private Dama dama;
     private Rey rey;
-    private  Bloqueo bloqueo;
+    private  Bloqueo bloqueo=new Bloqueo();
 
     public Tablero()
     {
@@ -102,7 +102,7 @@ public void diferenciarContenidoTablero(){
                 System.out.print("    " + " " + "    "); // cantidad de rayas por numero es 3
                 System.out.print("  ┃");
             }
-            else if (table[i][j] instanceof Peon){
+            if(diferenciarPiezas(i,j).equals("p")){
                 System.out.print( "    "+"♙"+ "    ");
                 System.out.print(" ┃");
             }
@@ -138,24 +138,25 @@ public void diferenciarContenidoTablero(){
 
 //------------------------diferenciarPieza-------------------//
 
- public String diferenciarPiezas(){
-        if (actual instanceof Peon){
+ public String diferenciarPiezas(int posicionX, int posicionY){
+        if (table[posicionX][posicionY] instanceof Peon){
             return "p";
         }
-        else if (actual instanceof Rey){
+        else if (table[posicionX][posicionY] instanceof Rey){
             return "r";
 
         }
-        else if (actual instanceof  Dama){
+        else if (table[posicionX][posicionY] instanceof  Dama){
             return "d";
      }
-        else if (actual instanceof Caballo){
+        else if (table[posicionX][posicionY] instanceof Caballo){
             return "c";
 
         }
-        else if (actual instanceof  Torre){
-            r
+        else if (table[posicionX][posicionY] instanceof  Torre){
+            return "t";
         }
+        return "b";//bloqueo
  }
 
 
@@ -165,28 +166,28 @@ public void elegirMovimiento(Scanner teclado){
         boolean correcto= false;
         do {
             System.out.println("ingrese las coordenadas de la pieza");
-            int posicionX = teclado.nextInt();
-            ;
-            int posicionY = teclado.nextInt();
-            if (table[posicionX - 1][posicionY - 1] == null) {
+            int posicionX = teclado.nextInt()-1;
+            int posicionY = teclado.nextInt()-1;
+            if (table[posicionX ][posicionY ] == null) {
                 System.out.print(" no hay pieza elegida  "); // cantidad de rayas por numero es 3
                 System.out.println("vuelva a ingresar las coordenadas");
 
-            } else if (table[posicionX - 1][posicionY - 1] instanceof Peon) {
+            } else if (table[posicionX][posicionY ] instanceof Peon) {
                 moviminetoPeonArriba(teclado,posicionX,posicionY);
                 correcto=true;
-            } else if (table[posicionX - 1][posicionY - 1] instanceof Rey) {
+            } else if (table[posicionX][posicionY ] instanceof Rey) {
                 System.out.print("    " + "♔" + "    ");
                 System.out.print(" ┃");
-            } else if (table[posicionX - 1][posicionY - 1] instanceof Dama) {
+            } else if (table[posicionX ][posicionY ] instanceof Dama) {
                 System.out.print("    " + "♕" + "    ");
                 System.out.print(" ┃");
-            } else if (table[posicionX - 1][posicionY - 1] instanceof Caballo) {
+            } else if (table[posicionX ][posicionY ] instanceof Caballo) {
                 System.out.print("    " + "♘" + "    ");
                 System.out.print(" ┃");
-            } else if (table[posicionX - 1][posicionY - 1] instanceof Torre) {
+            } else if (table[posicionX][posicionY ] instanceof Torre) {
                 movimientoTorre(teclado,posicionX,posicionY);
-            } else if (table[posicionX - 1][posicionY - 1] instanceof Alfil) {
+                correcto=true;
+            } else if (table[posicionX ][posicionY ] instanceof Alfil) {
                 System.out.print("    " + "♗" + "    ");
                 System.out.print(" ┃");
 
@@ -203,24 +204,23 @@ public void moviminetoPeonArriba(Scanner teclado, int posicionX, int posicionY){
     System.out.println("ingrese la columna");
        int y = teclado.nextInt();
        bloquearTablero();
-       if (x==2){
-           table[posicionX+1][posicionY-1]=null;
+
+
+       if (posicionX==1){//inicia siempre el peon con dos movimin¿entos
+           table[posicionX+2][posicionY]=null;
        }
        //le ponemos un menos 1 al posicionYde abajo puesto que siempre el movimineto valido es en la misma columna la cual es 0.
-   table[posicionX][posicionY-1]=null; //la posicion original del peon es posicionX-1 y posicionY-1, entonces si les quitamos los menos 1 tendriamos la posicion en el array donde se podria mover el peon. osea un espacio adelante
-    if(table[x-1][y-1]instanceof Bloqueo || table [x-1][y-1]==table[posicionX-1][posicionY-1]){
+   table[posicionX+1][posicionY]=null; //la posicion original del peon es posicionX-1 y posicionY-1, entonces si les quitamos los menos 1 tendriamos la posicion en el array donde se podria mover el peon. osea un espacio adelante
+    if(table[x-1][y-1]instanceof Bloqueo || table [x-1][y-1]==table[posicionX][posicionY])
+    {
         System.out.println("movimiento invalido");
     }
 
-        else if (table[x-1][y-1]==null ) {
-table[x-1][y-1]=table[posicionX-1][posicionY-1];
-        table[posicionX-1][posicionY-1]=null;
+        //arreglar abajo//
+    else {
+        table[x-1][y-1]=table[posicionX][posicionY];
+        table[posicionX][posicionY]=null;
         vaciarTablero();
-    }
-    else if (!(table[posicionX-1][posicionY-1] instanceof Bloqueo)){
-        table[x-1][y-1]=table[posicionX-1][posicionY-1];
-table[posicionX-1][posicionY-1]=null;
-vaciarTablero();
     }
 
 
@@ -237,7 +237,74 @@ public  void bloquearTablero(){
             }
         }
     }
+
 }
+public void disponibleTorre(int posicionX , int posicionY){
+
+
+        //posiciones disponibles a la derecha de la torre hasta romper cuando enocntramos otra ficha
+        for (int i =posicionY+1; i<8;i++)
+        {
+            if (table[posicionX][i] instanceof  Bloqueo){
+                table[posicionX][i]=null;
+            }
+            else {break;}
+            }
+
+        //a la izquierda
+    for (int i =posicionY-1; i>=0;i--)
+    {
+        if (table[posicionX][i] instanceof  Bloqueo){
+            table[posicionX][i]=null;
+        }
+        else {break;}
+    }
+
+
+    //hacia arriba
+    for (int i =posicionX-1; i>=0;i--)
+    {
+        if (table[i][posicionY] instanceof  Bloqueo){
+            table[i][posicionY]=null;
+        }
+        else {break;}
+
+    }
+
+    //hacia abajo
+    for (int i =posicionX+1; i<8;i++)
+    {
+        if (table[i][posicionY] instanceof  Bloqueo){
+            table[i][posicionY]=null;
+        }
+        else {break;}
+    }
+
+    /*for (int i =0;i<8;i++){
+        for (int j=posicionY;j<8;j++){
+            if (posicionX==i && posicionY==j){
+
+            }
+
+            else if(posicionX==i || posicionY ==j){
+                if (!(table[i][j] instanceof Bloqueo)) {
+                    break;
+                }
+
+                table[i][j]=null;
+            }
+
+            // else if(table[i][j]==null){
+              //  table[i][j]=bloqueo;//usaremos un puntero bloqueo para no crear objetos innecesarios de bloqueo
+           // }
+        }
+    }*/
+}
+
+
+
+
+
 //----------------------vacias casilleros--------------//
 public  void vaciarTablero(){
     for (int i =0;i<8;i++){
@@ -260,23 +327,14 @@ public  void movimientoTorre(Scanner teclado, int posicionX, int posicionY){
     System.out.println("ingrese la columna");
     int y = teclado.nextInt();
     bloquearTablero();
-    if (x==2){
-        table[posicionX+1][posicionY-1]=null;
-    }
-    //le ponemos un menos 1 al posicionYde abajo puesto que siempre el movimineto valido es en la misma columna la cual es 0.
-    table[posicionX][posicionY-1]=null; //la posicion original del peon es posicionX-1 y posicionY-1, entonces si les quitamos los menos 1 tendriamos la posicion en el array donde se podria mover el peon. osea un espacio adelante
-    if(table[x-1][y-1]instanceof Bloqueo || table [x-1][y-1]==table[posicionX-1][posicionY-1]){
+    disponibleTorre(posicionX,posicionY);
+    if(table[x-1][y-1]instanceof Bloqueo || table [x-1][y-1]==table[posicionX][posicionY]){
         System.out.println("movimiento invalido");
     }
 
-    else if (table[x-1][y-1]==null ) {
-        table[x-1][y-1]=table[posicionX-1][posicionY-1];
-        table[posicionX-1][posicionY-1]=null;
-        vaciarTablero();
-    }
-    else if (!(table[posicionX-1][posicionY-1] instanceof Bloqueo)){
-        table[x-1][y-1]=table[posicionX-1][posicionY-1];
-        table[posicionX-1][posicionY-1]=null;
+    else if (!(table[x-1][y-1] instanceof Bloqueo)){// si el contenido de esa posicion contiene cualquier tipo de pieza, se puede reemplazar con un else
+        table[x-1][y-1]=table[posicionX][posicionY];
+        table[posicionX][posicionY]=null;
         vaciarTablero();
     }
 
