@@ -1,5 +1,3 @@
-import Piezas.Piezas;
-import Piezas.Tipos.Peon;
 import Tablero.Tablero;
 
 import java.util.Scanner;
@@ -14,9 +12,9 @@ int i =0;
          nuevo.StartTablero();
          nuevo.imprimirTablero();
 do {
-    nuevo.elegirMovimiento(teclado);
+    nuevo.elegirPieza(teclado);
     nuevo.imprimirTablero();
-    nuevo.elegirMovimiento(teclado);
+    nuevo.elegirPieza(teclado);
     nuevo.imprimirTablero();
 i++;
 }

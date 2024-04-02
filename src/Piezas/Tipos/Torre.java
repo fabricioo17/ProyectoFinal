@@ -2,34 +2,52 @@ package Piezas.Tipos;
 
 import Piezas.Piezas;
 
-import java.util.Scanner;
-
 public class Torre extends Piezas {
+    private int posicionX;
+    private  int posicionY;
+    private int limititeArriba;
+    private  int limiteAbajo;
+    private int limiteDerecha;
+    private  int limiteIzquierda;
 
-private Jugadores jugador;
+    public int getPosicionX() {
+        return posicionX;
+    }
 
-    public Torre(Jugadores jugador) {
-        this.jugador=jugador;
+    public void setPosicionX(int posicionX) {
+        this.posicionX = posicionX;
+    }
+
+    public int getPosicionY() {
+        return posicionY;
+    }
+
+    public void setPosicionY(int posicionY) {
+        this.posicionY = posicionY;
     }
 
 
-
-
-    public void casillasDisponibles(Piezas [][] table,int posicionX, int posicionY){
+    public  void espaciosDisponibles(Piezas[][]table){
         for (int i =posicionY+1; i<8;i++)
         {
             if (table[posicionX][i] instanceof  Bloqueo){
                 table[posicionX][i]=null;
             }
-            else {break;}
+
+            else { limiteDerecha=i;break;}
         }
+        if (limiteDerecha==0){
+            limiteDerecha=7;
+        }
+
         //a la izquierda
         for (int i =posicionY-1; i>=0;i--)
         {
             if (table[posicionX][i] instanceof  Bloqueo){
                 table[posicionX][i]=null;
             }
-            else {break;}
+            else {limiteIzquierda=i;
+                break;}
         }
 
 
@@ -39,9 +57,11 @@ private Jugadores jugador;
             if (table[i][posicionY] instanceof  Bloqueo){
                 table[i][posicionY]=null;
             }
-            else {break;}
+            else {limititeArriba=i;
+                break;}
 
         }
+
 
         //hacia abajo
         for (int i =posicionX+1; i<8;i++)
@@ -49,33 +69,34 @@ private Jugadores jugador;
             if (table[i][posicionY] instanceof  Bloqueo){
                 table[i][posicionY]=null;
             }
-            else {break;}
+            else {limiteAbajo=i; // 
+                break;}
         }
+                if (limiteAbajo==0){
+                    limiteAbajo=7;
+                }
     }
 
-    public void movimientoTorres(Scanner teclado, int posicionX, int posicionY,Piezas [][] table){
-        System.out.println("ingrese a que fila quiere mover la torre");
-        int x = teclado.nextInt();
-        System.out.println("ingrese la columna");
-        int y = teclado.nextInt();
-     this.bloquearespacios(table);
-       casillasDisponibles(table,posicionX,posicionY);
-        if(table[x-1][y-1]instanceof Bloqueo || table [x-1][y-1]==table[posicionX][posicionY]){
-            System.out.println("movimiento invalido");
-        }
 
-        else if ((table[x-1][y-1] ==null)){// si el contenido de esa posicion contiene cualquier tipo de pieza, se puede reemplazar con un else
-            table[x-1][y-1]=table[posicionX][posicionY];
-          this.liberarEspacios(table);
-            table[posicionX][posicionY]=null;
+    /**
+     *
+     * @param movimientoX es la variable que indica en que fila queremos mover la pieza
+     * @param movimientoY es la variable que indica en que columna queremos mover la pieza
+     * @param table necesitamos llamar al array para identificar el valor de cada elemento del array
+     */
+    public void comerPiezaTorre(int movimientoX, int movimientoY, Piezas [][]table){
+        if (posicionX==movimientoX || posicionY==movimientoY){
+            if (table[movimientoX][movimientoY] instanceof Piezas && !(table[movimientoX][movimientoY] instanceof Bloqueo)) {
+                if (movimientoX >= limititeArriba && movimientoX <= limiteAbajo) { // el limite de arriba debe ser comparado con el movimiento X, ya que para saber en que fila (recta horizontal) estamos contamos de arriba hacia abajo por eso el minomo es el limite de arriba ya que empieza en 0 y el limeteabajo es mayor osea 7
+                    if (movimientoY <= limiteDerecha && movimientoY >= limiteIzquierda) {
+                        table[movimientoX][movimientoY] = table[posicionX][posicionY];
+                        table[posicionX][posicionY] = null;
+                    }
+                }
 
-        }
-        else if ((posicionX==x-1 || posicionY==y-1)&&!(table[x-1][y-1] instanceof Bloqueo)){
-            table[x-1][y-1]=table[posicionX][posicionY];
-            table[posicionX][posicionY]=null;
-            table[posicionX][posicionY].liberarEspacios(table);
-        }
 
+            }
+        }
 
     }
 

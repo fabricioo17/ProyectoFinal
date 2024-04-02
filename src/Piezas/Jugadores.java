@@ -1,4 +1,4 @@
-package Piezas.Tipos;
+package Piezas;
 
 public enum Jugadores {jugador1,jugador2
 }
