@@ -1,14 +1,15 @@
 package Tablero;
 
 
-import Piezas.Piezas;
+import Piezas.Jugadores;
+import Piezas.Pieza;
 import Piezas.Tipos.*;
 
 import java.util.Scanner;
 
 public class Tablero {
-    private  Piezas actual;
-    private Piezas[][] table;
+    private Pieza actual;
+    private Pieza[][] table;
     private Peon peon;
     private Torre torre;
     private Alfil alfil;
@@ -16,30 +17,30 @@ public class Tablero {
     private Dama dama;
     private Rey rey;
 
-    private  Bloqueo bloqueo=new Bloqueo();
+    private  Bloqueo bloqueo=new Bloqueo(Jugadores.jugador1);
 
     public Tablero()
     {
-        table = new Piezas[8][8];
+        table = new Pieza[8][8];
     }
 
 
 
 
     public void  StartTablero(){
-                table[0][0] = new Torre() ;
-                table[0][1]=new Caballo();
-                table[0][2]=new Alfil();
-                table[0][3] = new Rey() ;
-                table[0][4]=new Dama();
-                table[0][5]=new Alfil();
-                table[0][6]=new Caballo();
-                table[0][7] = new Torre() ;
+                table[0][0] = new Torre(Jugadores.jugador1) ;
+                table[0][1]=new Caballo(Jugadores.jugador1);
+                table[0][2]=new Alfil(Jugadores.jugador1);
+                table[0][3] = new Rey(Jugadores.jugador1) ;
+                table[0][4]=new Dama(Jugadores.jugador1);
+                table[0][5]=new Alfil(Jugadores.jugador1);
+                table[0][6]=new Caballo(Jugadores.jugador1);
+                table[0][7] = new Torre(Jugadores.jugador1) ;
 
 
                 for (int i =1;i<2;i++){
                     for (int j=0; j<8;j++){
-                        table[i][j]=new Peon();
+                        table[i][j]=new Peon(Jugadores.jugador1);
                     }
                 }
 
@@ -53,18 +54,18 @@ public class Tablero {
 
                for (int i =6;i<7;i++){
             for (int j=0; j<8;j++){
-                table[i][j]=new Peon();
+                table[i][j]=new Peon(Jugadores.jugador2);
               }
              }
 
-                table[7][0] = new Torre() ;
-                table[7][1]=new Caballo();
-                table[7][2]=new Alfil();
-                table[7][3] = new Rey() ;
-                table[7][4]=new Dama();
-                table[7][5]=new Alfil();
-                table[7][6]=new Caballo();
-                table[7][7] = new Torre() ;
+                table[7][0] = new Torre(Jugadores.jugador2) ;
+                table[7][1]=new Caballo(Jugadores.jugador2);
+                table[7][2]=new Alfil(Jugadores.jugador2);
+                table[7][3] = new Rey(Jugadores.jugador2) ;
+                table[7][4]=new Dama(Jugadores.jugador2);
+                table[7][5]=new Alfil(Jugadores.jugador2);
+                table[7][6]=new Caballo(Jugadores.jugador2);
+                table[7][7] = new Torre(Jugadores.jugador2) ;
 
     }
 
@@ -190,8 +191,8 @@ public void elegirPieza(Scanner teclado){
 
                  }
                 else if (table[posicionX][posicionY] instanceof Torre) {
-                    ((Torre) table[posicionX][posicionY]).setPosicionX(posicionX);
-                        ((Torre) table[posicionX][posicionY]).setPosicionY(posicionY);
+                    table[posicionX][posicionY].setPosicionX(posicionX);
+                        table[posicionX][posicionY].setPosicionY(posicionY);
                         ((Torre) table[posicionX][posicionY]).espaciosDisponibles(table);
                         movimientoTorre(teclado, posicionX, posicionY);
                         correcto = true;
@@ -262,70 +263,6 @@ public  void vaciarTablero(){
     }
 }
 
-
-
-//----------------TORRE-----------------------------------//
-    public void disponibleTorre(int posicionX , int posicionY){
-
-
-        //posiciones disponibles a la derecha de la torre hasta romper cuando enocntramos otra ficha
-        for (int i =posicionY+1; i<8;i++)
-        {
-            if (table[posicionX][i] instanceof  Bloqueo){
-                table[posicionX][i]=null;
-            }
-            else {break;}
-        }
-
-        //a la izquierda
-        for (int i =posicionY-1; i>=0;i--)
-        {
-            if (table[posicionX][i] instanceof  Bloqueo){
-                table[posicionX][i]=null;
-            }
-            else {break;}
-        }
-
-
-        //hacia arriba
-        for (int i =posicionX-1; i>=0;i--)
-        {
-            if (table[i][posicionY] instanceof  Bloqueo){
-                table[i][posicionY]=null;
-            }
-            else {break;}
-
-        }
-
-        //hacia abajo
-        for (int i =posicionX+1; i<8;i++)
-        {
-            if (table[i][posicionY] instanceof  Bloqueo){
-                table[i][posicionY]=null;
-            }
-            else {break;}
-        }
-
-    /*for (int i =0;i<8;i++){
-        for (int j=posicionY;j<8;j++){
-            if (posicionX==i && posicionY==j){
-
-            }
-
-            else if(posicionX==i || posicionY ==j){
-                if (!(table[i][j] instanceof Bloqueo)) {
-                    break;
-                }
-
-                table[i][j]=null;
-            }
-
-            // else if(table[i][j]==null){
-              //  table[i][j]=bloqueo;//usaremos un puntero bloqueo para no crear objetos innecesarios de bloqueo
-           // }
-        }
-    }*/
-    }
 
 public  void movimientoTorre(Scanner teclado, int posicionX, int posicionY){
         System.out.println("ingrese a que fila quiere mover la torre");

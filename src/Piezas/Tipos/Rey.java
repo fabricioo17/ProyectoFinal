@@ -1,10 +1,11 @@
 package Piezas.Tipos;
 
-import Piezas.Piezas;
+import Piezas.Jugadores;
+import Piezas.Pieza;
 
-public class Rey extends Piezas {
+public class Rey extends Pieza {
 
-    public Rey(){
-
+    public Rey(Jugadores propietario) {
+        super(propietario);
     }
 }

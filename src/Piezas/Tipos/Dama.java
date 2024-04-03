@@ -1,6 +1,10 @@
 package Piezas.Tipos;
 
-import Piezas.Piezas;
+import Piezas.Jugadores;
+import Piezas.Pieza;
 
-public class Dama extends Piezas {
+public class Dama extends Pieza {
+    public Dama(Jugadores propietario) {
+        super(propietario);
+    }
 }

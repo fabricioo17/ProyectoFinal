@@ -3,7 +3,7 @@ package Piezas;
 import java.util.ArrayList;
 
 public class GestorPiezas {
-    private ArrayList<Piezas>listaPiezas;
+    private ArrayList<Pieza>listaPiezas;
     public GestorPiezas (){
         listaPiezas=new ArrayList<>();
     }

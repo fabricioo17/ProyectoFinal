@@ -1,9 +1,12 @@
 package Piezas.Tipos;
 
-import Piezas.Piezas;
+import Piezas.Jugadores;
+import Piezas.Pieza;
 
-public class Bloqueo extends Piezas {
-    public Bloqueo( ) {
-
+public class Bloqueo extends Pieza {
+    public Bloqueo(Jugadores propietario) {
+        super(propietario);
     }
+
+
 }
