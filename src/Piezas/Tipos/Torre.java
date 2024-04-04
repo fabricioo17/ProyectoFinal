@@ -4,6 +4,11 @@ import Piezas.Jugadores;
 import Piezas.Pieza;
 
 public class Torre extends Pieza {
+    protected  int limitegeneral=0;
+    protected int limititeArriba=0;
+    protected   int limiteAbajo=0;
+
+    protected   int limiteIzquierda=0;
     public Torre(Jugadores propietario) {
         super(propietario);
     }
@@ -13,12 +18,12 @@ public class Torre extends Pieza {
         for (int i =posicionY+1; i<8;i++) {
             if (table[posicionX][i] instanceof Bloqueo) {
                 table[posicionX][i] = null;
-                if (i == 7) {// igualamos a 7 ya que en la version aterior solo le sumabamos +1 a la ultima casilla disponible,pero cuando la ultima casilla era 7 y si le sumaba 1 se pasaba del array por eso nunca actualizaba valor
-                    super.limitegeneral = 7;
-                }
+                    if (i == 7) {// igualamos a 7 ya que en la version aterior solo le sumabamos +1 a la ultima casilla disponible,pero cuando la ultima casilla era 7 y si le sumaba 1 se pasaba del array por eso nunca actualizaba valor
+                       limitegeneral = 7;
+                    }
             } else {
                // en los casos anteriores se iniciaba a 1 el limite de derecha porque al moverla pieza hacia abajo  no se actualizaba el limitederecha ya que se iba hasata la columna 7 entonces no ingresaba y se actualizaba con la i
-                    super.limitegeneral = i;
+                   limitegeneral = i;
                 break;
             }
         }
@@ -33,7 +38,7 @@ public class Torre extends Pieza {
             if (table[posicionX][i] instanceof  Bloqueo){
                 table[posicionX][i]=null;
                 if (i == 0) {// igualamos a 7 ya que en la version aterior solo le sumabamos +1 a la ultima casilla disponible,pero cuando la ultima casilla era 7 y si le sumaba 1 se pasaba del array por eso nunca actualizaba valor
-                    super.limiteIzquierda = 0;
+                   limiteIzquierda = 0;
                 }
             }
             else {limiteIzquierda=i;
@@ -47,7 +52,7 @@ public class Torre extends Pieza {
             if (table[i][posicionY] instanceof  Bloqueo){
                 table[i][posicionY]=null;
                 if (i == 0) {// igualamos a 7 ya que en la version aterior solo le sumabamos +1 a la ultima casilla disponible,pero cuando la ultima casilla era 7 y si le sumaba 1 se pasaba del array por eso nunca actualizaba valor
-                    super.limititeArriba = 0;
+                    limititeArriba = 0;
                 }
             }
             else {limititeArriba=i;
@@ -62,7 +67,7 @@ public class Torre extends Pieza {
             if (table[i][posicionY] instanceof  Bloqueo){
                 table[i][posicionY]=null;
                 if (i == 7) {// igualamos a 7 ya que en la version aterior solo le sumabamos +1 a la ultima casilla disponible,pero cuando la ultima casilla era 7 y si le sumaba 1 se pasaba del array por eso nunca actualizaba valor
-                    super.limiteAbajo = 7;
+                    limiteAbajo = 7;
                 }
             }
             else {limiteAbajo=i; // 

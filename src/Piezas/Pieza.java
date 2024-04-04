@@ -3,11 +3,6 @@ package Piezas;
 public class Pieza {
     protected int posicionX;
     protected  int posicionY;
-    protected  int limitegeneral=0;
-    protected int limititeArriba=0;
-   protected   int limiteAbajo=0;
-
-    protected   int limiteIzquierda=0;
 
     protected Jugadores propietario;
 
