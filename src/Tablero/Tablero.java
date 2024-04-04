@@ -94,11 +94,11 @@ public void imprimirTablero(){
     }
     System.out.println();
     dibujarLineas();
-   diferenciarContenidoTablero();
+   imprimirContenidoDeTabla();
 }
 
 
-public void diferenciarContenidoTablero(){
+public void imprimirContenidoDeTabla(){
 
     for (int i = 0; i < table.length; i++) {
         System.out.print((i + 1) + "  ┃");
@@ -107,7 +107,7 @@ public void diferenciarContenidoTablero(){
                 System.out.print("    " + " " + "    "); // cantidad de rayas por numero es 3
                 System.out.print("  ┃");
             }
-            if(diferenciarPiezas(i,j).equals("p")){
+            if(table[i][j] instanceof  Peon){
                 System.out.print( "    "+"♙"+ "    ");
                 System.out.print(" ┃");
             }
@@ -142,28 +142,6 @@ public void diferenciarContenidoTablero(){
 }
 
 //------------------------diferenciarPieza-------------------//
-
- public String diferenciarPiezas(int posicionX, int posicionY){
-        if (table[posicionX][posicionY] instanceof Peon){
-            return "p";
-        }
-        else if (table[posicionX][posicionY] instanceof Rey){
-            return "r";
-
-        }
-        else if (table[posicionX][posicionY] instanceof  Dama){
-            return "d";
-     }
-        else if (table[posicionX][posicionY] instanceof Caballo){
-            return "c";
-
-        }
-        else if (table[posicionX][posicionY] instanceof  Torre){
-            return "t";
-        }
-        return "b";//bloqueo
- }
-
 
 
 
@@ -220,8 +198,6 @@ public void moviminetoPeonArriba(Scanner teclado, int posicionX, int posicionY){
     System.out.println("ingrese la columna");
        int y = teclado.nextInt();
        bloquearTablero();
-
-
        if (posicionX==1){//inicia siempre el peon con dos movimin¿entos
            table[posicionX+2][posicionY]=null;
        }
