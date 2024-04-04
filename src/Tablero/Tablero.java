@@ -51,7 +51,6 @@ public class Tablero {
             }
         }
 
-        table[5][5]=new Alfil(Jugadores.jugador1);
 
 
 
@@ -107,8 +106,10 @@ public void diferenciarContenidoTablero(){
                 System.out.print("    " + " " + "    "); // cantidad de rayas por numero es 3
                 System.out.print("  ┃");
             }
-            if(diferenciarPiezas(i,j).equals("p")){
-                System.out.print( "    "+"♙"+ "    ");
+            if(table[i][j] instanceof Peon){
+                System.out.print( "    ");
+                ((Peon) table[i][j]).imprimirPeon();
+                System.out.print("    ");
                 System.out.print(" ┃");
             }
             else if (table[i][j] instanceof Rey){
@@ -120,15 +121,21 @@ public void diferenciarContenidoTablero(){
                 System.out.print(" ┃");
             }
             else if (table[i][j] instanceof Caballo){
-                System.out.print("    " +"♘"+ "    ");
+                System.out.print("    " );
+                ((Caballo) table[i][j]).imprimirCaballo();
+                System.out.print("    ");
                 System.out.print(" ┃");
             }
             else if (table [i][j]instanceof  Torre){
-                System.out.print("    " +"♖"+"    " );
+                System.out.print("    ");
+                ((Torre) table[i][j]).imprimirTorre();
+                System.out.print("    " );
                 System.out.print(" ┃");
             }
             else if (table [i][j]instanceof  Alfil){
-                System.out.print("    " +"♗"+"    " );
+                System.out.print("    ");
+                ((Alfil) table[i][j]).imprimirAlfil();
+                System.out.print("    " );
                 System.out.print(" ┃");
             }
             else if (table[i][j] instanceof Bloqueo){
@@ -141,28 +148,7 @@ public void diferenciarContenidoTablero(){
     }
 }
 
-//------------------------diferenciarPieza-------------------//
 
- public String diferenciarPiezas(int posicionX, int posicionY){
-        if (table[posicionX][posicionY] instanceof Peon){
-            return "p";
-        }
-        else if (table[posicionX][posicionY] instanceof Rey){
-            return "r";
-
-        }
-        else if (table[posicionX][posicionY] instanceof  Dama){
-            return "d";
-     }
-        else if (table[posicionX][posicionY] instanceof Caballo){
-            return "c";
-
-        }
-        else if (table[posicionX][posicionY] instanceof  Torre){
-            return "t";
-        }
-        return "b";//bloqueo
- }
 
 
 
@@ -226,20 +212,30 @@ public void elegirPieza(Scanner teclado){
         int x = teclado.nextInt()-1;
         System.out.println("ingrese la columna");
         int y = teclado.nextInt()-1;
+        Peon actual = (Peon) (table[posicionX][posicionY]);
 
         if(table[x][y]instanceof Bloqueo || table [x][y]==table[posicionX][posicionY])
         {
             System.out.println("movimiento invalido");
         }
-        else if ((table[x][y] == null)) {
+        Pieza nueva= actual.transformarPeon(table,teclado,x,y);
+        if ((table[x][y] == null)){
             table[x][y]=table[posicionX][posicionY];
             table[posicionX][posicionY]=null;
+
+       if (nueva !=null){
+           table[x][y]=nueva;
+
+       }
             System.out.println("movimiento realizado");
         }
         else if ((table[x][y] != null)) {
-            Peon actual = (Peon) (table[posicionX][posicionY]);
             if(actual.comerPiezaPeon(x, y, table)){
                 System.out.println("pieza comida");
+                if (nueva !=null){
+                    table[x][y]=nueva;
+
+                }
             }
             else {
                 System.out.println("movimiento invalido");

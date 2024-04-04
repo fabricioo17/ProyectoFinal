@@ -107,6 +107,15 @@ public class Caballo extends Pieza {
         return false;
 
     }
+
+    public void imprimirCaballo(){
+        if (this.propietario==Jugadores.jugador1) {
+            System.out.print(red + "♘" + reset);
+        }
+        else {
+            System.out.print(green + "♘" + reset);
+        }
+        }
     }
 
 

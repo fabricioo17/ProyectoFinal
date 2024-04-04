@@ -103,7 +103,14 @@ public class Torre extends Pieza {
 
     }
 
-
+    public void imprimirTorre(){
+        if (this.propietario==Jugadores.jugador1) {
+            System.out.print(red + "♖" + reset);
+        }
+        else {
+            System.out.print(green + "♖" + reset);
+        }
+    }
 
 
 }

@@ -5,6 +5,9 @@ public class Pieza {
     protected  int posicionY;
 
     protected Jugadores propietario;
+    protected final String red ="\u001B[31m";
+    protected final String green ="\u001B[32m";
+    protected final String reset = "\u001B[0m";
 
     public Pieza(Jugadores propietario) {
         this.propietario = propietario;

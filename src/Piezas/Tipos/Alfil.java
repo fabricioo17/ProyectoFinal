@@ -143,7 +143,14 @@ public class Alfil extends Pieza {
     }
 
 
-
+    public void imprimirAlfil(){
+        if (this.propietario==Jugadores.jugador1) {
+            System.out.print(red + "♗" + reset);
+        }
+        else {
+            System.out.print(green + "♗" + reset);
+        }
+    }
 
 
 
