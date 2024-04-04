@@ -159,7 +159,10 @@ public void elegirPieza(Scanner teclado){
             else {
                 bloquearTablero();
                 if (table[posicionX][posicionY] instanceof Peon) {
-                moviminetoPeonArriba(teclado, posicionX, posicionY);
+                    table[posicionX][posicionY].setPosicionX(posicionX);
+                    table[posicionX][posicionY].setPosicionY(posicionY);
+                    ((Peon) table[posicionX][posicionY]).espaciosDisponiblePeon(table);
+                    moviminetoPeon(teclado,posicionX,posicionY);
                 correcto = true;
                  }
                 else if (table[posicionX][posicionY] instanceof Rey) {
@@ -192,31 +195,31 @@ public void elegirPieza(Scanner teclado){
 
 
 
-public void moviminetoPeonArriba(Scanner teclado, int posicionX, int posicionY){//posicionX y posicionY son las coordenadas ingresadas por el jugador
+public void moviminetoPeon(Scanner teclado, int posicionX, int posicionY){//posicionX y posicionY son las coordenadas ingresadas por el jugador
     System.out.println("ingrese a que fila quiere mover el peon");
-       int x = teclado.nextInt();
+       int x = teclado.nextInt()-1;
     System.out.println("ingrese la columna");
-       int y = teclado.nextInt();
-       bloquearTablero();
-       if (posicionX==1){//inicia siempre el peon con dos movimin¿entos
-           table[posicionX+2][posicionY]=null;
-       }
-       //le ponemos un menos 1 al posicionYde abajo puesto que siempre el movimineto valido es en la misma columna la cual es 0.
-   table[posicionX+1][posicionY]=null; //la posicion original del peon es posicionX-1 y posicionY-1, entonces si les quitamos los menos 1 tendriamos la posicion en el array donde se podria mover el peon. osea un espacio adelante
-    if(table[x-1][y-1]instanceof Bloqueo || table [x-1][y-1]==table[posicionX][posicionY])
+       int y = teclado.nextInt()-1;
+
+       if(table[x][y]instanceof Bloqueo || table [x][y]==table[posicionX][posicionY])
     {
         System.out.println("movimiento invalido");
     }
-
-        //arreglar abajo//
-    else {
-        table[x-1][y-1]=table[posicionX][posicionY];
+       else if ((table[x][y] == null)) {
+        table[x][y]=table[posicionX][posicionY];
         table[posicionX][posicionY]=null;
-        vaciarTablero();
+           System.out.println("movimiento realizado");
     }
-
-
-
+         else if ((table[x][y] != null)) {
+        Peon actual = (Peon) (table[posicionX][posicionY]);
+        if(actual.comerPiezaPeon(x, y, table)){
+            System.out.println("pieza comida");
+        }
+        else {
+            System.out.println("movimiento invalido");
+        }
+    }
+    vaciarTablero();
 }
 
 
