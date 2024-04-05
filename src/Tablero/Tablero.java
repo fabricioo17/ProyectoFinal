@@ -179,8 +179,9 @@ public void elegirPieza(Scanner teclado){
                 else if (table[posicionX][posicionY] instanceof Reina) {
                     table[posicionX][posicionY].setPosicionX(posicionX);
                     table[posicionX][posicionY].setPosicionY(posicionY);
-                    ((Reina) table[posicionX][posicionY]).disponibleEspacioDama(table);
-                   movimientoReina(teclado,posicionX,posicionY);
+                    table[posicionX][posicionY].espaciosDiagonal(table);
+                    table[posicionX][posicionY].espaciosDisponiblesVerticalHorinzotal(table);
+                    ((Reina)table[posicionX][posicionY]).movimientoReina(teclado,table);
                     correcto = true;
                  }
                 else if (table[posicionX][posicionY] instanceof Caballo) {
@@ -193,17 +194,18 @@ public void elegirPieza(Scanner teclado){
                 else if (table[posicionX][posicionY] instanceof Torre) {
                     table[posicionX][posicionY].setPosicionX(posicionX);
                         table[posicionX][posicionY].setPosicionY(posicionY);
-                        ((Torre) table[posicionX][posicionY]).espaciosDisponibles(table);
-                        movimientoTorre(teclado, posicionX, posicionY);
+                         table[posicionX][posicionY].espaciosDisponiblesVerticalHorinzotal(table);
+                    ((Torre) table[posicionX][posicionY]).movimientoTorre(teclado,table);
                         correcto = true;
                          }
                 else if (table[posicionX][posicionY] instanceof Alfil) {
                     table[posicionX][posicionY].setPosicionX(posicionX);
                     table[posicionX][posicionY].setPosicionY(posicionY);
-                    ((Alfil) table[posicionX][posicionY]).espaciosDisponibleAlfil(table);
-                    movimientoAlfil(teclado,posicionX,posicionY);
+                    table[posicionX][posicionY].espaciosDiagonal(table);
+                    ((Alfil) table[posicionX][posicionY]).movimientoAlfil(teclado,table);
                     correcto = true;
                      }
+                vaciarTablero();
             }
         }
         while (correcto==false);
@@ -275,58 +277,10 @@ public  void vaciarTablero(){
         }
     }
 }
-    public  void movimientoReina(Scanner teclado, int posicionX, int posicionY) {
-        System.out.println("ingrese a que fila quiere mover la reina");
-        int x = teclado.nextInt() - 1;
-        System.out.println("ingrese la columna");
-        int y = teclado.nextInt() - 1;
-        if (table[x][y] instanceof Bloqueo || table[x][y] == table[posicionX][posicionY]) {
-            System.out.println("movimiento invalido");
-        } else if ((table[x][y] == null)) {
-            table[x][y] = table[posicionX][posicionY];
-            table[posicionX][posicionY] = null;
-            vaciarTablero();
-        } else if ((table[x][y] != null)) {// si el contenido de esa posicion contiene cualquier tipo de pieza, se puede reemplazar con un else
-            Reina actual = (Reina) (table[posicionX][posicionY]);
-            actual.comerPiezaReina(x, y, table);
-            vaciarTablero();
-        }
-    }
 
-public  void movimientoTorre(Scanner teclado, int posicionX, int posicionY) {
-    System.out.println("ingrese a que fila quiere mover la torre");
-    int x = teclado.nextInt() - 1;
-    System.out.println("ingrese la columna");
-    int y = teclado.nextInt() - 1;
-    if (table[x][y] instanceof Bloqueo || table[x][y] == table[posicionX][posicionY]) {
-        System.out.println("movimiento invalido");
-    } else if ((table[x][y] == null)) {
-        table[x][y] = table[posicionX][posicionY];
-        table[posicionX][posicionY] = null;
-        vaciarTablero();
-    } else if ((table[x][y] != null)) {// si el contenido de esa posicion contiene cualquier tipo de pieza, se puede reemplazar con un else
-        Torre actual = (Torre) (table[posicionX][posicionY]);
-        actual.comerPiezaTorre(x, y, table);
-        vaciarTablero();
-    }
-}
-    public  void movimientoAlfil(Scanner teclado, int posicionX, int posicionY) {
-        System.out.println("ingrese a que fila quiere mover el alfil");
-        int x = teclado.nextInt() - 1;
-        System.out.println("ingrese la columna");
-        int y = teclado.nextInt() - 1;
-        if (table[x][y] instanceof Bloqueo || table[x][y] == table[posicionX][posicionY]) {
-            System.out.println("movimiento invalido");
-        } else if ((table[x][y] == null)) {
-            table[x][y] = table[posicionX][posicionY];
-            table[posicionX][posicionY] = null;
-            vaciarTablero();
-        } else if ((table[x][y] != null)) {// si el contenido de esa posicion contiene cualquier tipo de pieza, se puede reemplazar con un else
-            Alfil actualAlfil = (Alfil) table[posicionX][posicionY];
-            actualAlfil.comerPiezaAlfil(x, y, table);
-            vaciarTablero();
-        }
-    }
+
+
+
 
         public  void movimientoCaballo (Scanner teclado, int posicionX, int posicionY){
             System.out.println("ingrese a que fila quiere mover el caballo");
