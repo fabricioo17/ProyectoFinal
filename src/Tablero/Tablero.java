@@ -218,25 +218,26 @@ public void elegirPieza(Scanner teclado){
         int y = teclado.nextInt()-1;
         Peon actual = (Peon) (table[posicionX][posicionY]);
 
-        if(table[x][y]instanceof Bloqueo || table [x][y]==table[posicionX][posicionY])
+        if(/*table[x][y]instanceof Bloqueo ||*/ table [x][y]==table[posicionX][posicionY])
         {
             System.out.println("movimiento invalido");
         }
-        Pieza nueva= actual.transformarPeon(table,teclado,x,y);
+
         if ((table[x][y] == null)){
             table[x][y]=table[posicionX][posicionY];
             table[posicionX][posicionY]=null;
 
-       if (nueva !=null){
-           table[x][y]=nueva;
-
+       if (x==7 || x==0){
+           Pieza nueva= actual.transformarPeon(table,teclado,x,y);
+        table[x][y]=nueva;
        }
             System.out.println("movimiento realizado");
         }
         else if ((table[x][y] != null)) {
             if(actual.comerPiezaPeon(x, y, table)){
                 System.out.println("pieza comida");
-                if (nueva !=null){
+                if (x==7 || x==0){
+                    Pieza nueva= actual.transformarPeon(table,teclado,x,y);
                     table[x][y]=nueva;
 
                 }

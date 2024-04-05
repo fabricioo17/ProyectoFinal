@@ -193,12 +193,51 @@ public class Reina extends Pieza {
 
     public void comerPiezaReina(int movimientoX, int movimientoY, Pieza[][]table){
 
+//comer como un alfil//
+        if (table[posicionX][posicionY].getPropietario() != table[movimientoX][movimientoY].getPropietario()) {
+            if (table[movimientoX][movimientoY] instanceof Pieza && !(table[movimientoX][movimientoY] instanceof Bloqueo)){
+                if (posicionX + 1 == movimientoX || posicionY + 1 == movimientoY && posicionX - 1 == movimientoX || posicionY - 1 == movimientoY) {
+                    if (posicionX != movimientoX && posicionY != movimientoY  ) {
+//si la pieza que come esta en el cuadrante de arriba a la izquieda
+                        if (movimientoX >= limiteArribaAlfil2 && movimientoY >= limiteIzquierdaAlfil2) {
+                            table[movimientoX][movimientoY] = table[posicionX][posicionY];
+                            table[posicionX][posicionY] = null;
+                        }
+                        //cuadrante de arriba a la derecha
+                        else if (movimientoX >= limiteArribaAlfil1 && movimientoY <= limitederechaAlfil2) {
+                            table[movimientoX][movimientoY] = table[posicionX][posicionY];
+                            table[posicionX][posicionY] = null;
+                        }
+                        // abajo derecha
+                        else if (movimientoX <= limiteAbajoAlfil && movimientoY <= limiteDerechaAlfil) {
+                            table[movimientoX][movimientoY] = table[posicionX][posicionY];
+                            table[posicionX][posicionY] = null;
+                        } else if (movimientoX <= limiteAbajoAlfil2 && movimientoY >= limiteIzquierdaAlfil1) {
+                            table[movimientoX][movimientoY] = table[posicionX][posicionY];
+                            table[posicionX][posicionY] = null;
+                        }
+                    }
+                }
+                if (posicionX == movimientoX || posicionY == movimientoY) {
+                        if (movimientoX >= limititeArribaTorre && movimientoX <= limiteAbajoTorre) { // el limite de arriba debe ser comparado con el movimiento X, ya que para saber en que fila (recta horizontal) estamos contamos de arriba hacia abajo por eso el minomo es el limite de arriba ya que empieza en 0 y el limeteabajo es mayor osea 7
+                            if (movimientoY <= limitegeneralTorre && movimientoY >= limiteIzquierdaTorre) {
+                                table[movimientoX][movimientoY] = table[posicionX][posicionY];
+                                table[posicionX][posicionY] = null;
+                            }
+
+                    }
+                }
+            }
+        }
+        else {
+            System.out.println("no puedes comer una pieza propia");
+        }
 
 
 
 
 
-        
+
     }
 
 
