@@ -14,7 +14,7 @@ public class Tablero {
     private Torre torre;
     private Alfil alfil;
     private Caballo caballo;
-    private Dama dama;
+    private Reina dama;
     private Rey rey;
 
     private  Bloqueo bloqueo=new Bloqueo(Jugadores.jugador1);
@@ -32,7 +32,7 @@ public class Tablero {
                 table[0][1]=new Caballo(Jugadores.jugador1);
                 table[0][2]=new Alfil(Jugadores.jugador1);
                 table[0][3] = new Rey(Jugadores.jugador1) ;
-                table[0][4]=new Dama(Jugadores.jugador1);
+                table[0][4]=new Reina(Jugadores.jugador1);
                 table[0][5]=new Alfil(Jugadores.jugador1);
                 table[0][6]=new Caballo(Jugadores.jugador1);
                 table[0][7] = new Torre(Jugadores.jugador1) ;
@@ -64,7 +64,7 @@ public class Tablero {
                 table[7][1]=new Caballo(Jugadores.jugador2);
                 table[7][2]=new Alfil(Jugadores.jugador2);
                 table[7][3] = new Rey(Jugadores.jugador2) ;
-                table[7][4]=new Dama(Jugadores.jugador2);
+                table[7][4]=new Reina(Jugadores.jugador2);
                 table[7][5]=new Alfil(Jugadores.jugador2);
                 table[7][6]=new Caballo(Jugadores.jugador2);
                 table[7][7] = new Torre(Jugadores.jugador2) ;
@@ -116,7 +116,7 @@ public void diferenciarContenidoTablero(){
                 System.out.print("    " +"♔"+ "    ");
                 System.out.print(" ┃");
             }
-            else if (table[i][j] instanceof  Dama){
+            else if (table[i][j] instanceof Reina){
                 System.out.print("    " +"♕"+ "    ");
                 System.out.print(" ┃");
             }
@@ -176,8 +176,12 @@ public void elegirPieza(Scanner teclado){
                 else if (table[posicionX][posicionY] instanceof Rey) {
 
                  }
-                else if (table[posicionX][posicionY] instanceof Dama) {
-
+                else if (table[posicionX][posicionY] instanceof Reina) {
+                    table[posicionX][posicionY].setPosicionX(posicionX);
+                    table[posicionX][posicionY].setPosicionY(posicionY);
+                    ((Reina) table[posicionX][posicionY]).disponibleEspacioDama(table);
+                   movimientoReina(teclado,posicionX,posicionY);
+                    correcto = true;
                  }
                 else if (table[posicionX][posicionY] instanceof Caballo) {
                     table[posicionX][posicionY].setPosicionX(posicionX);
@@ -270,7 +274,23 @@ public  void vaciarTablero(){
         }
     }
 }
-
+    public  void movimientoReina(Scanner teclado, int posicionX, int posicionY) {
+        System.out.println("ingrese a que fila quiere mover la reina");
+        int x = teclado.nextInt() - 1;
+        System.out.println("ingrese la columna");
+        int y = teclado.nextInt() - 1;
+        if (table[x][y] instanceof Bloqueo || table[x][y] == table[posicionX][posicionY]) {
+            System.out.println("movimiento invalido");
+        } else if ((table[x][y] == null)) {
+            table[x][y] = table[posicionX][posicionY];
+            table[posicionX][posicionY] = null;
+            vaciarTablero();
+        } else if ((table[x][y] != null)) {// si el contenido de esa posicion contiene cualquier tipo de pieza, se puede reemplazar con un else
+            Reina actual = (Reina) (table[posicionX][posicionY]);
+            actual.comerPiezaReina(x, y, table);
+            vaciarTablero();
+        }
+    }
 
 public  void movimientoTorre(Scanner teclado, int posicionX, int posicionY) {
     System.out.println("ingrese a que fila quiere mover la torre");
