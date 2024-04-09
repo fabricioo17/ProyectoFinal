@@ -1,14 +1,13 @@
 package Piezas.Tipos;
 
-/*import Piezas.Jugadores;
+import Piezas.Jugadores;
 import Piezas.Pieza;
-import Tablero.Usuario;
 
 import java.util.Scanner;
 
 public class Alfil extends Pieza  {
 
-    public Alfil(Usuario propietario) {
+    public Alfil(Jugadores propietario) {
         super(propietario);
     }
 
@@ -30,13 +29,13 @@ public class Alfil extends Pieza  {
             table[posicionX][posicionY] = null;
 
         } else if ((table[x][y] != null)) {// si el contenido de esa posicion contiene cualquier tipo de pieza, se puede reemplazar con un else
-           table[posicionX][posicionY].comerDiagonal(x, y, table);
+            table[posicionX][posicionY].comerDiagonal(x, y, table);
 
         }
     }
 
 
-    /*public void imprimirAlfil(){
+    public void imprimirAlfil(){
         if (this.propietario==Jugadores.jugador1) {
             System.out.print(red + "♗" + reset);
         }
@@ -48,4 +47,3 @@ public class Alfil extends Pieza  {
 
 
 }
-*/

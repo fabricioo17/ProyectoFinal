@@ -5,7 +5,7 @@ import Piezas.Pieza;
 import Tablero.Usuario;
 
 public class Bloqueo extends Pieza {
-    public Bloqueo(Usuario propietario) {
+    public Bloqueo(Jugadores propietario) {
         super(propietario);
     }
 

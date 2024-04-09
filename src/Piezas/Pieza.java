@@ -1,31 +1,28 @@
 package Piezas;
 
 import Piezas.Tipos.Bloqueo;
-import Tablero.Usuario;
 
 public abstract  class Pieza {
     protected int limiteAbajo1, limiteAbajo2, limitederecha1, limitederecha2, limiteIzquierda, limiteIzquierda2, limiteArriba1, limititeArriba2;
 
     protected int posicionX;
     protected  int posicionY;
-    protected Usuario propietario1;
 
-    //protected Jugadores propietario;
+    protected Jugadores propietario;
     protected final String red ="\u001B[31m";
     protected final String green ="\u001B[32m";
     protected final String reset = "\u001B[0m";
 
-    public Pieza(Usuario propietario1) {
-        this.propietario1 = propietario1;
+    public Pieza(Jugadores propietario) {
+        this.propietario = propietario;
     }
 
-
-    public Usuario getPropietario1() {
-        return propietario1;
+    public Jugadores getPropietario() {
+        return propietario;
     }
 
-    public void setPropietario1(Usuario propietario1) {
-        this.propietario1 = propietario1;
+    public void setPropietario(Jugadores propietario) {
+        this.propietario = propietario;
     }
 
     public int getPosicionX() {
@@ -130,7 +127,7 @@ public abstract  class Pieza {
 
 
     public void comerDiagonal(int movimientoX, int movimientoY, Pieza[][]table) {
-        if (!table[posicionX][posicionY].getPropietario1().getDni().equals(table[movimientoX][movimientoY].getPropietario1().getDni()) ) {
+        if (table[posicionX][posicionY].getPropietario() != table[movimientoX][movimientoY].getPropietario()) {
             if (posicionX != movimientoX && posicionY != movimientoY){
                 if (posicionX + 1 == movimientoX || posicionY + 1 == movimientoY && posicionX - 1 == movimientoX || posicionY - 1 == movimientoY) {
                     if (table[movimientoX][movimientoY] instanceof Pieza && !(table[movimientoX][movimientoY] instanceof Bloqueo)) {
@@ -249,7 +246,7 @@ public abstract  class Pieza {
      * @param table necesitamos llamar al array para identificar el valor de cada elemento del array
      */
     public void comerHorizontalVertical(int movimientoX, int movimientoY, Pieza[][]table){
-        if (!table[posicionX][posicionY].getPropietario1().getDni().equals(table[movimientoX][movimientoY].getPropietario1().getDni())) {
+        if (table[posicionX][posicionY].getPropietario()!=table[movimientoX][movimientoY].getPropietario()) {
             if (posicionX == movimientoX || posicionY == movimientoY) {
                 if (table[movimientoX][movimientoY] instanceof Pieza && !(table[movimientoX][movimientoY] instanceof Bloqueo)) {
                     if (movimientoX >= limiteArribaVertical && movimientoX <= limiteAbajoVertical) { // el limite de arriba debe ser comparado con el movimiento X, ya que para saber en que fila (recta horizontal) estamos contamos de arriba hacia abajo por eso el minomo es el limite de arriba ya que empieza en 0 y el limeteabajo es mayor osea 7

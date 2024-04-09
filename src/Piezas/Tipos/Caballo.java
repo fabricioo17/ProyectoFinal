@@ -2,8 +2,9 @@ package Piezas.Tipos;
 
 import Piezas.Jugadores;
 import Piezas.Pieza;
+public class Caballo extends Pieza {
 
-/*
+
     public Caballo(Jugadores propietario) {
         super(propietario);
     }
@@ -34,67 +35,66 @@ import Piezas.Pieza;
         }
 
         //izquierda arriba
-        if (posicionX>0 && posicionY >1){
+        if (posicionX > 0 && posicionY > 1) {
             if (table[posicionX - 1][posicionY - 2] instanceof Bloqueo) {
                 table[posicionX - 1][posicionY - 2] = null;
             }
-    }
+        }
 
 
-
-        if (posicionX <6 && posicionY <7 ) {
+        if (posicionX < 6 && posicionY < 7) {
             //abajo derecha
             if (table[posicionX + 2][posicionY + 1] instanceof Bloqueo) {
                 table[posicionX + 2][posicionY + 1] = null;
             }
         }
-        if (posicionX <6 && posicionY >0) {
+        if (posicionX < 6 && posicionY > 0) {
             //abajo izquierda
             if (table[posicionX + 2][posicionY - 1] instanceof Bloqueo) {
                 table[posicionX + 2][posicionY - 1] = null;
             }
         }
-        if (posicionX <7 && posicionY <6) {
+        if (posicionX < 7 && posicionY < 6) {
             // derecha abajo
             if (table[posicionX + 1][posicionY + 2] instanceof Bloqueo) {
                 table[posicionX + 1][posicionY + 2] = null;
             }
         }
-        if (posicionX <7 && posicionY >1){
+        if (posicionX < 7 && posicionY > 1) {
 
             //izquierda abajo
-            if (table[posicionX+1][posicionY-2] instanceof  Bloqueo){
-                table[posicionX+1][posicionY-2]=null;
+            if (table[posicionX + 1][posicionY - 2] instanceof Bloqueo) {
+                table[posicionX + 1][posicionY - 2] = null;
             }
         }
 
     }
 
-    public boolean comerPiezaCaballo(int movimientoX, int movimientoY, Pieza[][]table){
-        if (table[posicionX][posicionY].getPropietario()!=table[movimientoX][movimientoY].getPropietario()) {
+    public boolean comerPiezaCaballo(int movimientoX, int movimientoY, Pieza[][] table) {
+        if (table[posicionX][posicionY].getPropietario() != table[movimientoX][movimientoY].getPropietario()) {
             if (posicionX != movimientoX && posicionY != movimientoY) {
                 if (table[movimientoX][movimientoY] instanceof Pieza && !(table[movimientoX][movimientoY] instanceof Bloqueo)) {
-                   //come abajo derecha o izqierda
-                    if ((posicionX + 2 == movimientoX && posicionY + 1 == movimientoY)|| (posicionX + 2 == movimientoX && posicionY - 1 == movimientoY) ) {
-                                table[movimientoX][movimientoY] = table[posicionX][posicionY];
-                                table[posicionX][posicionY] = null;
-                    return true;
+                    //come abajo derecha o izqierda
+                    if ((posicionX + 2 == movimientoX && posicionY + 1 == movimientoY) || (posicionX + 2 == movimientoX && posicionY - 1 == movimientoY)) {
+                        table[movimientoX][movimientoY] = table[posicionX][posicionY];
+                        table[posicionX][posicionY] = null;
+                        return true;
                     }
 
                     // come arriba derecha o izquierda
-                    if ((posicionX - 2 == movimientoX && posicionY + 1 == movimientoY)|| (posicionX - 2 == movimientoX && posicionY - 1 == movimientoY) ) {
+                    if ((posicionX - 2 == movimientoX && posicionY + 1 == movimientoY) || (posicionX - 2 == movimientoX && posicionY - 1 == movimientoY)) {
                         table[movimientoX][movimientoY] = table[posicionX][posicionY];
                         table[posicionX][posicionY] = null;
-                    return  true;
+                        return true;
                     }
-                        // come derecha, arriba o abajo
-                    if ((posicionX -1 == movimientoX && posicionY + 2 == movimientoY)|| (posicionX +1 == movimientoX && posicionY +2 == movimientoY) ) {
+                    // come derecha, arriba o abajo
+                    if ((posicionX - 1 == movimientoX && posicionY + 2 == movimientoY) || (posicionX + 1 == movimientoX && posicionY + 2 == movimientoY)) {
                         table[movimientoX][movimientoY] = table[posicionX][posicionY];
                         table[posicionX][posicionY] = null;
                         return true;
                     }
                     // come izquieda , arriba o abajo
-                    if ((posicionX -1 == movimientoX && posicionY -2 == movimientoY)|| (posicionX +1 == movimientoX && posicionY-2 == movimientoY) ) {
+                    if ((posicionX - 1 == movimientoX && posicionY - 2 == movimientoY) || (posicionX + 1 == movimientoX && posicionY - 2 == movimientoY)) {
                         table[movimientoX][movimientoY] = table[posicionX][posicionY];
                         table[posicionX][posicionY] = null;
                         return true;
@@ -107,16 +107,15 @@ import Piezas.Pieza;
 
     }
 
-    public void imprimirCaballo(){
-        if (this.propietario==Jugadores.jugador1) {
+    public void imprimirCaballo() {
+        if (this.propietario == Jugadores.jugador1) {
             System.out.print(red + "♘" + reset);
-        }
-        else {
+        } else {
             System.out.print(green + "♘" + reset);
-        }
         }
     }
 
+}
 
 
 
@@ -129,4 +128,4 @@ import Piezas.Pieza;
 
 
 
-*/
+
