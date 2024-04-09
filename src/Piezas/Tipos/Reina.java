@@ -5,8 +5,6 @@ import Piezas.Pieza;
 import java.util.Scanner;
 
 public class Reina extends Pieza {
-
-
     public Reina(Jugadores propietario) {
         super(propietario);
     }

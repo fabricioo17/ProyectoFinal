@@ -1,6 +1,6 @@
 package Tablero;
 
-
+/*
 import Piezas.Jugadores;
 import Piezas.Pieza;
 import Piezas.Tipos.*;
@@ -59,6 +59,8 @@ public class Tablero {
                 table[i][j]=new Peon(Jugadores.jugador2);
               }
              }
+                table[6][0]=new Peon(Jugadores.jugador1);
+
 
                 table[7][0] = new Torre(Jugadores.jugador2) ;
                 table[7][1]=new Caballo(Jugadores.jugador2);
@@ -170,7 +172,7 @@ public void elegirPieza(Scanner teclado){
                     table[posicionX][posicionY].setPosicionX(posicionX);
                     table[posicionX][posicionY].setPosicionY(posicionY);
                     ((Peon) table[posicionX][posicionY]).espaciosDisponiblePeon(table);
-                    moviminetoPeon(teclado,posicionX,posicionY);
+                    ((Peon) table[posicionX][posicionY]).moviminetoPeon(teclado,table);
                 correcto = true;
                  }
                 else if (table[posicionX][posicionY] instanceof Rey) {
@@ -213,43 +215,6 @@ public void elegirPieza(Scanner teclado){
 
 
 
-    public void moviminetoPeon(Scanner teclado, int posicionX, int posicionY){//posicionX y posicionY son las coordenadas ingresadas por el jugador
-        System.out.println("ingrese a que fila quiere mover el peon");
-        int x = teclado.nextInt()-1;
-        System.out.println("ingrese la columna");
-        int y = teclado.nextInt()-1;
-        Peon actual = (Peon) (table[posicionX][posicionY]);
-
-        if(/*table[x][y]instanceof Bloqueo ||*/ table [x][y]==table[posicionX][posicionY])
-        {
-            System.out.println("movimiento invalido");
-        }
-
-        if ((table[x][y] == null)){
-            table[x][y]=table[posicionX][posicionY];
-            table[posicionX][posicionY]=null;
-
-       if (x==7 || x==0){
-           Pieza nueva= actual.transformarPeon(table,teclado,x,y);
-        table[x][y]=nueva;
-       }
-            System.out.println("movimiento realizado");
-        }
-        else if ((table[x][y] != null)) {
-            if(actual.comerPiezaPeon(x, y, table)){
-                System.out.println("pieza comida");
-                if (x==7 || x==0){
-                    Pieza nueva= actual.transformarPeon(table,teclado,x,y);
-                    table[x][y]=nueva;
-
-                }
-            }
-            else {
-                System.out.println("movimiento invalido");
-            }
-        }
-        vaciarTablero();
-    }
 
 
 //---------------bloquear casilleros---------------------//
@@ -329,3 +294,4 @@ public  void vaciarTablero(){
     }
 
 }
+*/

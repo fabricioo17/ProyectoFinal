@@ -1,13 +1,14 @@
 package Piezas.Tipos;
 
-import Piezas.Jugadores;
+/*import Piezas.Jugadores;
 import Piezas.Pieza;
+import Tablero.Usuario;
 
 import java.util.Scanner;
 
 public class Alfil extends Pieza  {
 
-    public Alfil(Jugadores propietario) {
+    public Alfil(Usuario propietario) {
         super(propietario);
     }
 
@@ -35,7 +36,7 @@ public class Alfil extends Pieza  {
     }
 
 
-    public void imprimirAlfil(){
+    /*public void imprimirAlfil(){
         if (this.propietario==Jugadores.jugador1) {
             System.out.print(red + "♗" + reset);
         }
@@ -47,3 +48,4 @@ public class Alfil extends Pieza  {
 
 
 }
+*/

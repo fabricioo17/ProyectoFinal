@@ -38,6 +38,43 @@ public class Peon extends Pieza {
 
         }
 
+        public void moviminetoPeon(Scanner teclado , Pieza [][ ] table){//posicionX y posicionY son las coordenadas ingresadas por el jugador
+                System.out.println("ingrese a que fila quiere mover el peon");
+                int x = teclado.nextInt()-1;
+                System.out.println("ingrese la columna");
+                int y = teclado.nextInt()-1;
+                Peon actual = (Peon) (table[posicionX][posicionY]);
+
+                if(/*table[x][y]instanceof Bloqueo ||*/ table [x][y]==table[posicionX][posicionY])
+                {
+                        System.out.println("no puedes mover al mismo sitio");
+                }
+
+                if ((table[x][y] == null)){
+                        table[x][y]=table[posicionX][posicionY];
+                        table[posicionX][posicionY]=null;
+
+                        if (x==7 || x==0){
+                                Pieza nueva= actual.transformarPeon(table,teclado,x,y);
+                                table[x][y]=nueva;
+                        }
+                        System.out.println("movimiento realizado");
+                }
+                else if ((table[x][y] != null)) {
+                        if(actual.comerPiezaPeon(x, y, table)){
+                                System.out.println("pieza comida");
+                                if (x==7 || x==0){
+                                        Pieza nueva= actual.transformarPeon(table,teclado,x,y);
+                                        table[x][y]=nueva;
+
+                                }
+                        }
+                        else {
+                                System.out.println("movimiento invalido");
+                        }
+                }
+
+        }
 
         public boolean comerPiezaPeon(int movimientoX, int movimientoY, Pieza[][] table) {
                 if (table[posicionX][posicionY].getPropietario() != table[movimientoX][movimientoY].getPropietario()) {
@@ -76,12 +113,12 @@ public class Peon extends Pieza {
                         int opcion = teclado.nextInt();
                         switch (opcion) {
                                 case 1:
-                                        return new Torre(table[posicionX][posicionY].getPropietario());
+                                        return new Torre(table[movimientoX][moviminetoY].getPropietario());
                                 case 2:
-                                        return new Alfil(table[posicionX][posicionY].getPropietario());
+                                        return new Alfil(table[movimientoX][moviminetoY].getPropietario());
 
                                 case 3:
-                                        return new Caballo(table[posicionX][posicionY].getPropietario());
+                                        return new Caballo(table[movimientoX][moviminetoY].getPropietario());
                                 default:
                                         System.out.println("error");
                                         return null;
