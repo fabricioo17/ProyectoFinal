@@ -1,10 +1,12 @@
 package Piezas.Tipos;
 import Piezas.Jugadores;
 import Piezas.Pieza;
+import Piezas.movimientos.Diagonal;
+import Piezas.movimientos.Vertical;
 
 import java.util.Scanner;
 
-public class Reina extends Pieza {
+public class Reina extends Pieza implements Vertical, Diagonal {
 
 
     public Reina(Jugadores propietario) {
@@ -18,15 +20,24 @@ public class Reina extends Pieza {
         int x = teclado.nextInt() - 1;
         System.out.println("ingrese la columna");
         int y = teclado.nextInt() - 1;
-        if (table[x][y] instanceof Bloqueo || table[x][y] == table[posicionX][posicionY]) {
-            System.out.println("movimiento invalido");
-        } else if ((table[x][y] == null)) {
-            table[x][y] = table[posicionX][posicionY];
-            table[posicionX][posicionY] = null;
+        int opcion = movimientoTotalTorre(table,x,y,posicionX,posicionY);
+        int opcion2=movimientoDiagonal(table,x,y,posicionX,posicionY);
+        if (opcion==0){
+            System.out.println("pieza movida");
+        } else if (opcion==1) {
+            System.out.println("pieza comida");
 
-        } else if ((table[x][y] != null)) {// si el contenido de esa posicion contiene cualquier tipo de pieza, se puede reemplazar con un else
-            table[posicionX][posicionY].comerHorizontalVertical(x,y,table);
-            table[posicionX][posicionY].comerDiagonal(x,y,table);
+        }
+        else {
+            if (opcion2==0){
+                System.out.println("pieza movida");
+            }
+            else if(opcion2==1){
+                System.out.println("pieza comida");
+            }
+            else {
+                System.out.println("movimiento invalido");
+            }
         }
     }
 
@@ -35,8 +46,10 @@ public class Reina extends Pieza {
 
 
 
-
-
+    @Override
+    public int movimientoTotalTorre(Pieza[][] table, int movimientoX, int movimientoY, int posicionX, int posicionY) {
+        return Vertical.super.movimientoTotalTorre(table, movimientoX, movimientoY, posicionX, posicionY);
+    }
 
 
 

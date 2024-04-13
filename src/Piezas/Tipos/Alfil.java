@@ -2,36 +2,38 @@ package Piezas.Tipos;
 
 import Piezas.Jugadores;
 import Piezas.Pieza;
+import Piezas.movimientos.Diagonal;
 
 import java.util.Scanner;
 
-public class Alfil extends Pieza  {
+public class Alfil extends Pieza  implements Diagonal {
 
     public Alfil(Jugadores propietario) {
         super(propietario);
     }
 
 
-    public  void movimientoAlfil(Scanner teclado,Pieza [][] table) {
+    @Override
+    public int movimientoDiagonal(Pieza[][] table, int movimientoX, int movimientoY, int posicionX, int posicionY) {
+        return Diagonal.super.movimientoDiagonal(table, movimientoX, movimientoY, posicionX, posicionY);
+    }
+
+    public  void movimientoAlfil(Scanner teclado, Pieza [][] table) {
         System.out.println("ingrese a que fila quiere mover el alfil");
         int x = teclado.nextInt() - 1;
         System.out.println("ingrese la columna");
         int y = teclado.nextInt() - 1;
 
-        //espacios disponibles//
-        table[posicionX][posicionY].espaciosDiagonal(table);
+int opcion=  movimientoDiagonal(table,x,y,posicionX,posicionY);
 
-
-        if (table[x][y] instanceof Bloqueo || table[x][y] == table[posicionX][posicionY]) {
-            System.out.println("movimiento invalido");
-        } else if ((table[x][y] == null)) {
-            table[x][y] = table[posicionX][posicionY];
-            table[posicionX][posicionY] = null;
-
-        } else if ((table[x][y] != null)) {// si el contenido de esa posicion contiene cualquier tipo de pieza, se puede reemplazar con un else
-            table[posicionX][posicionY].comerDiagonal(x, y, table);
-
-        }
+    if (opcion==0){
+        System.out.println("pieza movida");
+    } else if (opcion==1) {
+        System.out.println("pieza comida");
+    }
+    else {
+        System.out.println(" error de movimiento");
+    }
     }
 
 

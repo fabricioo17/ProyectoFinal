@@ -60,14 +60,14 @@ public class Tablero {
             }
         }
 
-        table[7][0] = new Torre(Jugadores.jugador2) ;
+        table[7][0] = new Torre(Jugadores.jugador1) ;
         table[7][1]=new Caballo(Jugadores.jugador2);
         table[7][2]=new Alfil(Jugadores.jugador2);
         table[7][3] = new Rey(Jugadores.jugador2) ;
         table[7][4]=new Reina(Jugadores.jugador2);
         table[7][5]=new Alfil(Jugadores.jugador2);
         table[7][6]=new Caballo(Jugadores.jugador2);
-        table[7][7] = new Torre(Jugadores.jugador2) ;
+        table[7][7] = new Torre(Jugadores.jugador1) ;
 
     }
 
@@ -157,6 +157,8 @@ public class Tablero {
         boolean correcto= false;
         do {
             System.out.println("ingrese las coordenadas de la pieza");
+
+
             int posicionX = teclado.nextInt()-1;
             int posicionY = teclado.nextInt()-1;
             if (table[posicionX ][posicionY ] == null) {
@@ -165,7 +167,7 @@ public class Tablero {
 
             }
             else {
-                bloquearTablero();
+
                 if (table[posicionX][posicionY] instanceof Peon) {
                     table[posicionX][posicionY].setPosicionX(posicionX);
                     table[posicionX][posicionY].setPosicionY(posicionY);
@@ -179,33 +181,28 @@ public class Tablero {
                 else if (table[posicionX][posicionY] instanceof Reina) {
                     table[posicionX][posicionY].setPosicionX(posicionX);
                     table[posicionX][posicionY].setPosicionY(posicionY);
-                    table[posicionX][posicionY].espaciosDiagonal(table);
-                    table[posicionX][posicionY].espaciosDisponiblesVerticalHorinzotal(table);
                     ((Reina)table[posicionX][posicionY]).movimientoReina(teclado,table);
                     correcto = true;
                 }
                 else if (table[posicionX][posicionY] instanceof Caballo) {
                     table[posicionX][posicionY].setPosicionX(posicionX);
                     table[posicionX][posicionY].setPosicionY(posicionY);
-                    ((Caballo) table[posicionX][posicionY]).espacioDisponibleCaballo(table);
                     movimientoCaballo(teclado,posicionX,posicionY);
                     correcto = true;
                 }
                 else if (table[posicionX][posicionY] instanceof Torre) {
                     table[posicionX][posicionY].setPosicionX(posicionX);
                     table[posicionX][posicionY].setPosicionY(posicionY);
-                    table[posicionX][posicionY].espaciosDisponiblesVerticalHorinzotal(table);
                     ((Torre) table[posicionX][posicionY]).movimientoTorre(teclado,table);
                     correcto = true;
                 }
                 else if (table[posicionX][posicionY] instanceof Alfil) {
                     table[posicionX][posicionY].setPosicionX(posicionX);
                     table[posicionX][posicionY].setPosicionY(posicionY);
-                    table[posicionX][posicionY].espaciosDiagonal(table);
                     ((Alfil) table[posicionX][posicionY]).movimientoAlfil(teclado,table);
                     correcto = true;
                 }
-                vaciarTablero();
+
             }
         }
         while (correcto==false);
@@ -287,27 +284,20 @@ public class Tablero {
         int x = teclado.nextInt()-1;
         System.out.println("ingrese la columna");
         int y = teclado.nextInt()-1;
-        if(table[x][y]instanceof Bloqueo || table [x][y]==table[posicionX][posicionY]){
-            System.out.println("movimiento invalido");
-        }
-        else if ((table[x][y]==null)){
-            table[x][y]=table[posicionX][posicionY];
-            table[posicionX][posicionY]=null;
-            vaciarTablero();
-            System.out.println("pieza movida");
-        }
-        else if ((table[x][y] != null)){// si el contenido de esa posicion contiene cualquier tipo de pieza, se puede reemplazar con un else
-            Caballo caballo= (Caballo) table[posicionX][posicionY];
-            if (caballo.comerPiezaCaballo(x,y,table)== true){
-                System.out.println("pieza comida");
-            }
-            else {
-                System.out.println("no puedes comer esa pieza");
-            }
-            vaciarTablero();
+        int opcionMovimiento= ((Caballo)table[posicionX][posicionY]).movimientoTotalCaballo(table,x,y);
+       if (opcionMovimiento==0){
+           System.out.println("pieza movida");
+       } else if (opcionMovimiento==1) {
+           System.out.println("pieza comida");
+       }
+       else {
+           System.out.println("movimiento invalido");
+       }
+
+        vaciarTablero();
         }
 
-    }
+
 
 
 
