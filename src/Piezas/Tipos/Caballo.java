@@ -1,12 +1,11 @@
 package Piezas.Tipos;
 
-import Piezas.Jugadores;
 import Piezas.Pieza;
 public class Caballo extends Pieza {
 
 
-    public Caballo(Jugadores propietario) {
-        super(propietario);
+    public Caballo(Boolean blancas) {
+        super(blancas);
     }
 
 
@@ -15,11 +14,11 @@ public class Caballo extends Pieza {
 
          // arriba derecha lejos
             if (posicionX - 2==movimientoX && posicionY+1== movimientoY){
-                if (table[movimientoX][movimientoY] instanceof Bloqueo) {
+                if (table[movimientoX][movimientoY] ==null) {
                     table[movimientoX][movimientoY] = table[posicionX][posicionY];
                     return 0;
                 }
-                if (table[posicionX - 2][posicionY + 1] instanceof Pieza){
+                if (table[movimientoX][movimientoY] instanceof Pieza){
                     table[movimientoX][movimientoY] = table[posicionX][posicionY];
                     table[posicionX][posicionY] = null;
                     return 1;
@@ -29,7 +28,7 @@ public class Caballo extends Pieza {
         //arriba izquierda
 
             if (posicionX - 2== movimientoX && posicionY - 1== movimientoY) {
-                if (table[movimientoX][movimientoY] instanceof Bloqueo) {
+                if (table[movimientoX][movimientoY] == null) {
                     table[movimientoX][movimientoY] = table[posicionX][posicionY];
                     return  0;
                 }
@@ -46,7 +45,7 @@ public class Caballo extends Pieza {
 
             //  derecha arriba
             if (posicionX - 1== movimientoX && posicionY + 2== movimientoY) {
-                if (table[movimientoX][movimientoY] instanceof Bloqueo) {
+                if (table[movimientoX][movimientoY] ==null) {
                     table[movimientoX][movimientoY] = table[posicionX][posicionY];
                     return  0;
                 }
@@ -61,7 +60,7 @@ public class Caballo extends Pieza {
         //izquierda arriba
 
             if (posicionX - 1== movimientoX&&posicionY - 2== movimientoY) {
-                if (table[movimientoX][movimientoY] instanceof Bloqueo) {
+                if (table[movimientoX][movimientoY] ==null) {
                     table[movimientoX][movimientoY] = table[posicionX][posicionY];
                     return  0;
                 }
@@ -77,7 +76,7 @@ public class Caballo extends Pieza {
 
             //abajo derecha
             if (posicionX + 2==movimientoX &&posicionY + 1==movimientoY)  {
-                if (table[movimientoX][movimientoY] instanceof Bloqueo) {
+                if (table[movimientoX][movimientoY] == null) {
                     table[movimientoX][movimientoY] = table[posicionX][posicionY];
                     return  0;
                 }
@@ -91,7 +90,7 @@ public class Caballo extends Pieza {
 
             //abajo izquierda
             if (posicionX + 2 == movimientoX&& posicionY - 1== movimientoY ) {
-                if (table[movimientoX][movimientoY] instanceof Bloqueo) {
+                if (table[movimientoX][movimientoY]== null) {
                     table[movimientoX][movimientoY] = table[posicionX][posicionY];
                     return  0;
                 }
@@ -105,7 +104,7 @@ public class Caballo extends Pieza {
 
             // derecha abajo
             if (posicionX + 1== movimientoX &&posicionY + 2== movimientoY) {
-                if (table[movimientoX][movimientoY] instanceof Bloqueo) {
+                if (table[movimientoX][movimientoY] ==null) {
                     table[movimientoX][movimientoY] = table[posicionX][posicionY];
                     return  0;
                 }
@@ -120,7 +119,7 @@ public class Caballo extends Pieza {
 
             //izquierda abajo
             if (posicionX + 1== movimientoX && posicionY - 2== movimientoY) {
-                if (table[movimientoX][movimientoY] instanceof Bloqueo) {
+                if (table[movimientoX][movimientoY] == null) {
                     table[movimientoX][movimientoY] = table[posicionX][posicionY];
                     return  0;
                 }
@@ -137,7 +136,7 @@ public class Caballo extends Pieza {
 
 
     public void imprimirCaballo() {
-        if (this.propietario == Jugadores.jugador1) {
+        if (this.blancas) {
             System.out.print(red + "♘" + reset);
         } else {
             System.out.print(green + "♘" + reset);

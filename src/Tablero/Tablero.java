@@ -1,7 +1,6 @@
 package Tablero;
 
 
-import Piezas.Jugadores;
 import Piezas.Pieza;
 import Piezas.Tipos.*;
 
@@ -17,8 +16,6 @@ public class Tablero {
     private Reina dama;
     private Rey rey;
 
-    private  Bloqueo bloqueo=new Bloqueo(Jugadores.jugador1);
-
     public Tablero()
     {
         table = new Pieza[8][8];
@@ -28,18 +25,18 @@ public class Tablero {
 
 
     public void  StartTablero(){
-        table[0][0] = new Torre(Jugadores.jugador1) ;
-        table[0][1]=new Caballo(Jugadores.jugador1);
-        table[0][2]=new Alfil(Jugadores.jugador1);
-        table[0][3] = new Rey(Jugadores.jugador1) ;
-        table[0][4]=new Reina(Jugadores.jugador1);
-        table[0][5]=new Alfil(Jugadores.jugador1);
-        table[0][6]=new Caballo(Jugadores.jugador1);
-        table[0][7] = new Torre(Jugadores.jugador1) ;
+        table[0][0] = new Torre(true) ;
+        table[0][1]=new Caballo(true);
+        table[0][2]=new Alfil(true);
+        table[0][3] = new Rey(true) ;
+        table[0][4]=new Reina(true);
+        table[0][5]=new Alfil(true);
+        table[0][6]=new Caballo(true);
+        table[0][7] = new Torre(true) ;
 
         for (int i =1;i<2;i++){
             for (int j=0; j<8;j++){
-                table[i][j]=new Peon(Jugadores.jugador1);
+                table[i][j]=new Peon(true);
             }
         }
 
@@ -52,34 +49,22 @@ public class Tablero {
         }
 
 
-
-
         for (int i =6;i<7;i++){
             for (int j=0; j<8;j++){
-                table[i][j]=new Peon(Jugadores.jugador2);
+                table[i][j]=new Peon(false);
             }
         }
 
-        table[7][0] = new Torre(Jugadores.jugador1) ;
-        table[7][1]=new Caballo(Jugadores.jugador2);
-        table[7][2]=new Alfil(Jugadores.jugador2);
-        table[7][3] = new Rey(Jugadores.jugador2) ;
-        table[7][4]=new Reina(Jugadores.jugador2);
-        table[7][5]=new Alfil(Jugadores.jugador2);
-        table[7][6]=new Caballo(Jugadores.jugador2);
-        table[7][7] = new Torre(Jugadores.jugador1) ;
+        table[7][0] = new Torre(false) ;
+        table[7][1]=new Caballo(false);
+        table[7][2]=new Alfil(false);
+        table[7][3] = new Rey(false) ;
+        table[7][4]=new Reina(false);
+        table[7][5]=new Alfil(false);
+        table[7][6]=new Caballo(false);
+        table[7][7] = new Torre(false) ;
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -138,10 +123,6 @@ public class Tablero {
                     System.out.print("    " );
                     System.out.print(" ┃");
                 }
-                else if (table[i][j] instanceof Bloqueo){
-                    System.out.print("    " + " " + "    "); // cantidad de rayas por numero es 3
-                    System.out.print("  ┃");
-                }
             }
             System.out.println();
             dibujarLineas();
@@ -171,8 +152,7 @@ public class Tablero {
                 if (table[posicionX][posicionY] instanceof Peon) {
                     table[posicionX][posicionY].setPosicionX(posicionX);
                     table[posicionX][posicionY].setPosicionY(posicionY);
-                    ((Peon) table[posicionX][posicionY]).espaciosDisponiblePeon(table);
-                    moviminetoPeon(teclado,posicionX,posicionY);
+                    ((Peon) table[posicionX][posicionY]).movimientoPeon(teclado,table);
                     correcto = true;
                 }
                 else if (table[posicionX][posicionY] instanceof Rey) {
@@ -210,71 +190,6 @@ public class Tablero {
 
 
 
-    public void moviminetoPeon(Scanner teclado, int posicionX, int posicionY){//posicionX y posicionY son las coordenadas ingresadas por el jugador
-        System.out.println("ingrese a que fila quiere mover el peon");
-        int x = teclado.nextInt()-1;
-        System.out.println("ingrese la columna");
-        int y = teclado.nextInt()-1;
-        Peon actual = (Peon) (table[posicionX][posicionY]);
-
-        if(/*table[x][y]instanceof Bloqueo ||*/ table [x][y]==table[posicionX][posicionY])
-        {
-            System.out.println("movimiento invalido");
-        }
-
-        if ((table[x][y] == null)){
-            table[x][y]=table[posicionX][posicionY];
-            table[posicionX][posicionY]=null;
-
-            if (x==7 || x==0){
-                Pieza nueva= actual.transformarPeon(table,teclado,x,y);
-                table[x][y]=nueva;
-            }
-            System.out.println("movimiento realizado");
-        }
-        else if ((table[x][y] != null)) {
-            if(actual.comerPiezaPeon(x, y, table)){
-                System.out.println("pieza comida");
-                if (x==7 || x==0){
-                    Pieza nueva= actual.transformarPeon(table,teclado,x,y);
-                    table[x][y]=nueva;
-
-                }
-            }
-            else {
-                System.out.println("movimiento invalido");
-            }
-        }
-        vaciarTablero();
-    }
-
-
-    //---------------bloquear casilleros---------------------//
-    public  void bloquearTablero(){
-        for (int i =0;i<8;i++){
-            for (int j=0;j<8;j++){
-                if(table[i][j]==null){
-                    table[i][j]=bloqueo;//usaremos un puntero bloqueo para no crear objetos innecesarios de bloqueo
-                }
-            }
-        }
-
-    }
-
-
-
-
-    //----------------------vacias casilleros--------------//
-    public  void vaciarTablero(){
-        for (int i =0;i<8;i++){
-            for (int j=0;j<8;j++){
-                if(table[i][j] instanceof Bloqueo){
-                    table[i][j]=null;
-                }
-            }
-        }
-    }
-
 
 
 
@@ -293,8 +208,6 @@ public class Tablero {
        else {
            System.out.println("movimiento invalido");
        }
-
-        vaciarTablero();
         }
 
 

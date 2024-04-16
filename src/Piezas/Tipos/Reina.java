@@ -1,18 +1,15 @@
 package Piezas.Tipos;
-import Piezas.Jugadores;
 import Piezas.Pieza;
-import Piezas.movimientos.Diagonal;
-import Piezas.movimientos.Vertical;
+import Piezas.movimientos.Movimientos;
 
 import java.util.Scanner;
 
-public class Reina extends Pieza implements Vertical, Diagonal {
+public class Reina extends Pieza implements Movimientos {
 
 
-    public Reina(Jugadores propietario) {
-        super(propietario);
+    public Reina(Boolean blancas) {
+        super(blancas);
     }
-
 
 
     public  void movimientoReina(Scanner teclado, Pieza[][ ]table) {
@@ -40,21 +37,5 @@ public class Reina extends Pieza implements Vertical, Diagonal {
             }
         }
     }
-
-
-
-
-
-
-    @Override
-    public int movimientoTotalTorre(Pieza[][] table, int movimientoX, int movimientoY, int posicionX, int posicionY) {
-        return Vertical.super.movimientoTotalTorre(table, movimientoX, movimientoY, posicionX, posicionY);
-    }
-
-
-
-
-
-
 
 }

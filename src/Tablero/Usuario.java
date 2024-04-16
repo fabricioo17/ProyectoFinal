@@ -1,11 +1,11 @@
 package Tablero;
-
 import java.util.Scanner;
 
 public class Usuario {
     private String nombre;
     private  int edad;
     private String dni;
+    private Boolean blancas;
     public  Usuario(Scanner teclado){
         System.out.println("ingrese su nombre: ");
         nombre=teclado.nextLine();
@@ -36,5 +36,13 @@ public class Usuario {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public Boolean getBlancas() {
+        return blancas;
+    }
+
+    public void setBlancas(Boolean blancas) {
+        this.blancas = blancas;
     }
 }

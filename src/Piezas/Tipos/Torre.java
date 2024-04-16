@@ -1,17 +1,15 @@
 package Piezas.Tipos;
 
-import Piezas.Jugadores;
 import Piezas.Pieza;
-import Piezas.movimientos.Vertical;
+import Piezas.movimientos.Movimientos;
 
 import java.util.Scanner;
 
-public class Torre extends Pieza implements Vertical {
-    public Torre(Jugadores propietario) {
-        super(propietario);
+public class Torre extends Pieza implements Movimientos {
+    public Torre(Boolean blancas) {super(blancas);
     }
     public void imprimirTorre(){
-        if (this.propietario==Jugadores.jugador1) {
+        if (this.blancas) {
             System.out.print(red + "♖" + reset);
         }
         else {
@@ -37,7 +35,7 @@ else {
 
     @Override
     public int movimientoTotalTorre(Pieza[][] table, int movimientoX, int movimientoY, int posicionX, int posicionY) {
-        return Vertical.super.movimientoTotalTorre(table, movimientoX, movimientoY, posicionX, posicionY);
+        return Movimientos.super.movimientoTotalTorre(table, movimientoX, movimientoY, posicionX, posicionY);
     }
 
 

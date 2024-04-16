@@ -1,22 +1,21 @@
 package Piezas.Tipos;
 
-import Piezas.Jugadores;
 import Piezas.Pieza;
-import Piezas.movimientos.Diagonal;
-
+import Piezas.movimientos.Movimientos;
 import java.util.Scanner;
 
-public class Alfil extends Pieza  implements Diagonal {
+public class Alfil extends Pieza  implements Movimientos {
 
-    public Alfil(Jugadores propietario) {
-        super(propietario);
+    public Alfil(boolean blancas) {
+        super(blancas);
     }
 
 
     @Override
     public int movimientoDiagonal(Pieza[][] table, int movimientoX, int movimientoY, int posicionX, int posicionY) {
-        return Diagonal.super.movimientoDiagonal(table, movimientoX, movimientoY, posicionX, posicionY);
+        return Movimientos.super.movimientoDiagonal(table, movimientoX, movimientoY, posicionX, posicionY);
     }
+
 
     public  void movimientoAlfil(Scanner teclado, Pieza [][] table) {
         System.out.println("ingrese a que fila quiere mover el alfil");
@@ -38,7 +37,7 @@ int opcion=  movimientoDiagonal(table,x,y,posicionX,posicionY);
 
 
     public void imprimirAlfil(){
-        if (this.propietario==Jugadores.jugador1) {
+        if (this.blancas) {
             System.out.print(red + "♗" + reset);
         }
         else {

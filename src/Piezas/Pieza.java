@@ -1,28 +1,25 @@
 package Piezas;
 
-import Piezas.Tipos.Bloqueo;
-
 public abstract  class Pieza {
+    protected boolean blancas;
     protected int posicionX;
     protected int posicionY;
 
-    protected Jugadores propietario;
     protected final String red = "\u001B[31m";
     protected final String green = "\u001B[32m";
     protected final String reset = "\u001B[0m";
 
-    public Pieza(Jugadores propietario) {
-        this.propietario = propietario;
+    public boolean isBlancas() {
+        return blancas;
     }
 
-    public Jugadores getPropietario() {
-        return propietario;
+    public void setBlancas(boolean blancas) {
+        this.blancas = blancas;
     }
 
-    public void setPropietario(Jugadores propietario) {
-        this.propietario = propietario;
+    public Pieza(Boolean blancas) {
+        this.blancas =blancas;
     }
-
     public int getPosicionX() {
         return posicionX;
     }
