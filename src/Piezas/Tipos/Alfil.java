@@ -1,23 +1,22 @@
 package Piezas.Tipos;
 
 import Piezas.Pieza;
-import Piezas.movimientos.Movimientos;
+import Piezas.movimientosReutilizables.MovimientoDiagonal;
+import Tablero.Tablero;
+
 import java.util.Scanner;
 
-public class Alfil extends Pieza  implements Movimientos {
+public class Alfil extends Pieza  implements MovimientoDiagonal {
 
     public Alfil(boolean blancas) {
         super(blancas);
     }
 
 
-    @Override
-    public int movimientoDiagonal(Pieza[][] table, int movimientoX, int movimientoY, int posicionX, int posicionY) {
-        return Movimientos.super.movimientoDiagonal(table, movimientoX, movimientoY, posicionX, posicionY);
-    }
 
 
-    public  void movimientoAlfil(Scanner teclado, Pieza [][] table) {
+
+    public  int movimientoAlfil(Scanner teclado, Tablero table) {
         System.out.println("ingrese a que fila quiere mover el alfil");
         int x = teclado.nextInt() - 1;
         System.out.println("ingrese la columna");
@@ -27,11 +26,18 @@ int opcion=  movimientoDiagonal(table,x,y,posicionX,posicionY);
 
     if (opcion==0){
         System.out.println("pieza movida");
+        return 0;
     } else if (opcion==1) {
         System.out.println("pieza comida");
+        return 0;
+    }
+    else  if (opcion==2){
+        System.out.println(" no puedes comer tu propia pieza");
+        return 1;
     }
     else {
         System.out.println(" error de movimiento");
+        return 1;
     }
     }
 

@@ -1,14 +1,16 @@
 package Piezas.Tipos;
 
 import Piezas.Pieza;
-import Piezas.movimientos.Movimientos;
+import Piezas.movimientosReutilizables.MovimientoHorizontalVertical;
+import Tablero.Tablero;
 
 import java.util.Scanner;
 
-public class Torre extends Pieza implements Movimientos {
-    public Torre(Boolean blancas) {super(blancas);
+public class Torre extends Pieza implements MovimientoHorizontalVertical {
+    public Torre(Boolean blancas, int posicionX, int posicionY) {super(blancas, posicionX,posicionY);
     }
     public void imprimirTorre(){
+
         if (this.blancas) {
             System.out.print(red + "♖" + reset);
         }
@@ -16,27 +18,28 @@ public class Torre extends Pieza implements Movimientos {
             System.out.print(green + "♖" + reset);
         }
     }
-    public  void movimientoTorre(Scanner teclado,Pieza [ ][] table) {
+    public int movimientoTorre(Scanner teclado, Tablero table) {
+
         System.out.println("ingrese a que fila quiere mover la torre");
         int x = teclado.nextInt() - 1;
         System.out.println("ingrese la columna");
         int y = teclado.nextInt() - 1;
-int opcionMovimiento=      movimientoTotalTorre(table,x,y,posicionX,posicionY);
+    int opcionMovimiento=      movimientoVertical(table,x,y,posicionX,posicionY);
     if (opcionMovimiento==0){
         System.out.println("pieza movida");
-    } else if (opcionMovimiento==1) {
+        return 0;
+    }
+    else if (opcionMovimiento==1) {
         System.out.println("pieza comida");
-
+        return 0;
     }
-else {
-        System.out.println("error de movimiento");
+    else if (opcionMovimiento==2){
+        System.out.println("no puedes comer tu propia pieza");
+        return 1;
+        }
+        else {
+        System.out.println("movimiento invalido");
+        return 1;
+            }
     }
-    }
-
-    @Override
-    public int movimientoTotalTorre(Pieza[][] table, int movimientoX, int movimientoY, int posicionX, int posicionY) {
-        return Movimientos.super.movimientoTotalTorre(table, movimientoX, movimientoY, posicionX, posicionY);
-    }
-
-
 }

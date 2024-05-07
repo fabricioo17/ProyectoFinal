@@ -12,6 +12,8 @@ public class Usuario {
         System.out.println("ingrese su edad ");
         edad=teclado.nextInt();
         System.out.println("ingresa tu dni");
+        dni= teclado.next();
+        teclado.nextLine();
     }
 
     public String getNombre() {
