@@ -58,7 +58,7 @@ public abstract  class Pieza {
 
     }
 
-    public boolean identificarJacke(Tablero tablero, Boolean blanco, int posicionReyX, int posicionReyY) {
+    public boolean confirmarJaque(Tablero tablero, int posicionReyX, int posicionReyY) {
         Pieza[][] table = tablero.getTable();
         //hacia arriba
         for (int i = posicionReyX - 1; i >= 0; i--) {
@@ -69,10 +69,11 @@ public abstract  class Pieza {
                     break;
                 }
                 //un else if mas cuando es pieza enemiga pero que no puede comernos
-            } else if (table[i][posicionReyY] instanceof Pieza /*&& (table[i][posicionReyY].isBlancas() == table[posicionReyX][posicionReyY].isBlancas() || table[i][posicionReyY] instanceof Pieza */) {
-                break;
             }
 
+            if (table[i][posicionReyY] instanceof Pieza ){
+                break;
+            }
         }
 
 
@@ -81,10 +82,12 @@ public abstract  class Pieza {
             if (table[i][posicionReyY] instanceof Torre || table[i][posicionReyY] instanceof Reina) {
                 if (table[i][posicionReyY].isBlancas() != table[posicionReyX][posicionReyY].isBlancas()) {
                     return true;
-                } else {
+                }
+                else {
                     break;
                 }
-            } else if (table[i][posicionReyY] instanceof Pieza && table[i][posicionReyY].isBlancas() == table[posicionReyX][posicionReyY].isBlancas()) {
+            }
+            if (table[i][posicionReyY] instanceof Pieza ) {
                 break;
             }
         }
@@ -100,7 +103,8 @@ public abstract  class Pieza {
                 else {
                     break;
                 }
-            } else if (table[posicionReyX][i] instanceof Pieza && table[posicionReyX][i].isBlancas() == table[posicionReyX][posicionReyY].isBlancas()) {
+            }
+            if (table[posicionReyX][i] instanceof Pieza) {
 
                 break;
             }
@@ -115,7 +119,8 @@ public abstract  class Pieza {
                 } else {
                     break;
                 }
-            } else if (table[posicionReyX][i] instanceof Pieza && table[posicionReyX][i].isBlancas() == table[posicionReyX][posicionReyY].isBlancas()) {
+            }
+            if (table[posicionReyX][i] instanceof Pieza ) {
 
                 break;
             }
@@ -125,13 +130,17 @@ public abstract  class Pieza {
         //------------------------diagonal----------------------------------------------//
         for (int i = posicionReyX - 1, j = posicionReyY - 1; i >= 0 && j >= 0; i--, j--) {
             //arriba izquierda
-            if (table[i][j] instanceof Reina || table[i][j] instanceof Alfil) {
+            if (table[i][j] instanceof Reina || table[i][j] instanceof Alfil || table[i][j] instanceof Peon) {
 
                 if (table[i][j].isBlancas() != table[posicionReyX][posicionReyY].isBlancas()) {
                     return true;
                 }
+                else {
+                    break;
+                }
             }
-            else if (table[i][j] instanceof Pieza && table[i][j].isBlancas() == table[posicionReyX][posicionReyY].isBlancas()) {
+
+             if (table[i][j] instanceof Pieza) {
                 break;
             }
 
@@ -141,12 +150,16 @@ public abstract  class Pieza {
         //arriba a la derecha
         for (int i = posicionReyX - 1, j = posicionReyY + 1; i >= 0 && j < 8; i--, j++) {
             //arriba izquierda
-            if (table[i][j] instanceof Reina || table[i][j] instanceof Alfil) {
+            if (table[i][j] instanceof Reina || table[i][j] instanceof Alfil || table[i][j] instanceof Peon) {
                 if (table[i][j].isBlancas() != table[posicionReyX][posicionReyY].isBlancas()) {
                     return true;
                 }
+                else {
+                    break;
+                }
 
-            } else if (table[i][j] instanceof Pieza && table[i][j].isBlancas() == table[posicionReyX][posicionReyY].isBlancas()) {
+            }
+            if (table[i][j] instanceof Pieza && table[i][j].isBlancas() == table[posicionReyX][posicionReyY].isBlancas()) {
                 break;
             }
         }
@@ -156,11 +169,15 @@ public abstract  class Pieza {
 
         for (int i = posicionReyX + 1, j = posicionReyY - 1; i < 8 && j >= 0; i++, j--) {
             //arriba izquierda
-            if (table[i][j] instanceof Reina || table[i][j] instanceof Alfil) {
+            if (table[i][j] instanceof Reina || table[i][j] instanceof Alfil || table[i][j] instanceof Peon) {
                 if (table[i][j].isBlancas() != table[posicionReyX][posicionReyY].isBlancas()) {
                     return true;
                 }
-            } else if (table[i][j] instanceof Pieza && table[i][j].isBlancas() == table[posicionReyX][posicionReyY].isBlancas()) {
+                else {
+                    break;
+                }
+            }
+            if (table[i][j] instanceof Pieza) { // cambiar a cualquier pieza , ya que al no ser ni alfil o reina no hay eligro alguno
                 break;
             }
         }
@@ -168,11 +185,15 @@ public abstract  class Pieza {
 
         for (int i = posicionReyX + 1, j = posicionReyY + 1; i < 8 && j < 8; i++, j++) {
             //abajo derecha
-            if (table[i][j] instanceof Reina || table[i][j] instanceof Alfil) {
+            if (table[i][j] instanceof Reina || table[i][j] instanceof Alfil || table[i][j] instanceof Peon) {
                 if (table[i][j].isBlancas() != table[posicionReyX][posicionReyY].isBlancas()) {
                     return true;
                 }
-            } else if (table[i][j] instanceof Pieza && table[i][j].isBlancas() == table[posicionReyX][posicionReyY].isBlancas()) {
+                else {
+                    break;
+                }
+            }
+            if (table[i][j] instanceof Pieza) {
                 break;
             }
 
@@ -313,24 +334,8 @@ public abstract  class Pieza {
             table[movimientoX][movimientoY].setPosicionY(movimientoY);
         }
 
-    public void jackemate(Tablero tablero, int posicionReyX, int posicionReyY, Boolean blancas) {
-        int contador = 0;
-        Pieza[][] table = tablero.getTable();
+public  abstract  boolean protegerRey(Tablero tablero, int posicionX, int posicionY, boolean blanco);
 
-
-        //vertical
-        for (int i = posicionReyX, j = posicionReyX; i <= 7 && j >= 0; i++, j++) {
-            if (table[i][posicionReyY].isBlancas() == blancas && (table[i][posicionReyY] instanceof Torre || table[i][posicionReyY] instanceof Reina)) {
-                contador++;
-            }
-            if (table[j][posicionReyY].isBlancas() == blancas && (table[j][posicionReyY] instanceof Torre || table[j][posicionReyY] instanceof Reina)) {
-                contador++;
-            }
-
-
-        }
-
-    }
 
 
 }

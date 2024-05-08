@@ -44,7 +44,7 @@ public class Caballo extends Pieza {
             if (posicionX - 2==movimientoX && posicionY+1== movimientoY){
                 if (table[movimientoX][movimientoY] ==null) {
                     cambiarPosicion(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                         return 3;
                     }
@@ -53,7 +53,7 @@ public class Caballo extends Pieza {
                 if (table[movimientoX][movimientoY] != null &&table[movimientoX][movimientoY].isBlancas()!=blancas){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarPiezaComida(tablero,posicionOriginalX,posicionOriginalY,piezaComida);
                         return 3;
                     }
@@ -66,7 +66,7 @@ public class Caballo extends Pieza {
             if (posicionX - 2== movimientoX && posicionY - 1== movimientoY) {
                 if (table[movimientoX][movimientoY] == null) {
                     cambiarPosicion(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                         return 3;
                     }
@@ -75,7 +75,7 @@ public class Caballo extends Pieza {
                 if (table[posicionX - 2][posicionY - 1] instanceof Pieza  &&table[movimientoX][movimientoY].isBlancas()!=blancas){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarPiezaComida(tablero,posicionOriginalX,posicionOriginalY,piezaComida);
                         return 3;
                     }
@@ -91,7 +91,7 @@ public class Caballo extends Pieza {
             if (posicionX - 1== movimientoX && posicionY + 2== movimientoY) {
                 if (table[movimientoX][movimientoY] ==null) {
                     cambiarPosicion(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                         return 3;
                     }
@@ -100,7 +100,7 @@ public class Caballo extends Pieza {
                 if (table[posicionX -1][posicionY + 2] instanceof Pieza  &&table[movimientoX][movimientoY].isBlancas()!=blancas){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarPiezaComida(tablero,posicionOriginalX,posicionOriginalY,piezaComida);
                         return 3;
                     }
@@ -114,7 +114,7 @@ public class Caballo extends Pieza {
             if (posicionX - 1== movimientoX&&posicionY - 2== movimientoY) {
                 if (table[movimientoX][movimientoY] ==null) {
                     cambiarPosicion(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                         return 3;
                     }
@@ -123,7 +123,7 @@ public class Caballo extends Pieza {
                 if (table[posicionX -1][posicionY - 2] instanceof Pieza  &&table[movimientoX][movimientoY].isBlancas()!=blancas){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarPiezaComida(tablero,posicionOriginalX,posicionOriginalY,piezaComida);
                         return 3;
                     }
@@ -138,7 +138,7 @@ public class Caballo extends Pieza {
             if (posicionX + 2==movimientoX &&posicionY + 1==movimientoY)  {
                 if (table[movimientoX][movimientoY] == null) {
                     cambiarPosicion(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                         return 3;
                     }
@@ -147,7 +147,7 @@ public class Caballo extends Pieza {
                 if (table[posicionX + 2][posicionY + 1] != null  &&table[movimientoX][movimientoY].isBlancas()!=blancas){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                    cambiarPosicionPieza(tablero,movimientoX,movimientoY);
-                   if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                   if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                        regresarPiezaComida(tablero,posicionOriginalX,posicionOriginalY,piezaComida);
                        return 3;
                    }
@@ -160,7 +160,7 @@ public class Caballo extends Pieza {
             if (posicionX + 2 == movimientoX&& posicionY - 1== movimientoY ) {
                 if (table[movimientoX][movimientoY]== null) {
                     cambiarPosicion(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                         return 3;
                     }
@@ -169,7 +169,7 @@ public class Caballo extends Pieza {
                 if (table[posicionX + 2][posicionY - 1] != null  &&table[movimientoX][movimientoY].isBlancas()!=blancas){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarPiezaComida(tablero,posicionOriginalX,posicionOriginalY,piezaComida);
                         return 3;
                     }
@@ -182,7 +182,7 @@ public class Caballo extends Pieza {
             if (posicionX + 1== movimientoX &&posicionY + 2== movimientoY) {
                 if (table[movimientoX][movimientoY] ==null) {
                     cambiarPosicion(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                         return 3;
                     }
@@ -193,7 +193,7 @@ public class Caballo extends Pieza {
                 if (table[posicionX +1][posicionY + 2] instanceof Pieza  && table[movimientoX][movimientoY].isBlancas()!=blancas){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarPiezaComida(tablero,posicionOriginalX,posicionOriginalY,piezaComida);
                         return 3;
                     }
@@ -207,7 +207,7 @@ public class Caballo extends Pieza {
             if (posicionX + 1== movimientoX && posicionY - 2== movimientoY) {
                 if (table[movimientoX][movimientoY] == null) {
                     cambiarPosicion(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                         return 3;
                     }
@@ -216,7 +216,7 @@ public class Caballo extends Pieza {
                 if (table[posicionX +1][posicionY - 2] instanceof Pieza &&table[movimientoX][movimientoY].isBlancas()!=blancas){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
-                    if (identificarJacke(tablero,blancas,rey.getPosicionX(),rey.getPosicionY())){
+                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
                         regresarPiezaComida(tablero,posicionOriginalX,posicionOriginalY,piezaComida);
                         return 3;
                     }
@@ -226,8 +226,201 @@ public class Caballo extends Pieza {
             return 2;
         }
 
+    @Override
+    public boolean protegerRey(Tablero tablero, int posicionX, int posicionY, boolean blanco) {
+        Pieza piezaComida;
+        Rey rey = tablero.obtenerPiezaReyBlanco(blanco);
+        Pieza[][] table = tablero.getTable();
+        // obtenemos el rey para que en cada movieminto veamos si podemos proteger al rey
+        int posicionOriginalX = posicionX;
+        int posicionOriginalY = posicionY;
+        // arriba lejos derecha
+if (posicionX - 2 >=0 && posicionY+1<=7) {
+    if ((table[posicionX - 2][posicionY + 1] == null)) {
+        cambiarPosicion(tablero, posicionX - 2, posicionY + 1);
+        if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY()) == false) {
+            regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+            return true;
+        }
+        regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+    } else {
+        if (table[posicionX - 2][posicionY + 1].isBlancas() != blancas) {
+            piezaComida = tablero.obtenerPieza(posicionX - 2, posicionY + 1);
+            cambiarPosicionPieza(tablero, posicionX - 2, posicionY + 1);
+            if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                return true;
+            }
+            regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+        }
+    }
+
+}
+        //arriba lejos izquierda
+
+        if ((posicionX-2>=0 && posicionY-1>=0)) {
+                        if (table[posicionX - 2][posicionY - 1] == null) {
+                            cambiarPosicion(tablero, posicionX - 2, posicionY - 1);
+                            if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                                regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                                return true;
+                            }
+                            regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                        } else {
+                            if (table[posicionX - 2][posicionY - 1].isBlancas() != blancas) {
+                                piezaComida = tablero.obtenerPieza(posicionX - 2, posicionY - 1);
+                                cambiarPosicionPieza(tablero, posicionX - 2, posicionY - 1);
+                                if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                                    regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                                    return true;
+                                }
+                                regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                            }
+                        }
+            }
 
 
+        //  derecha lejos arriba
+        if ((posicionX - 1 >=0 && posicionY+2<=7)) {
+            if (table[posicionX - 1][posicionY + 2] == null) {
+                cambiarPosicion(tablero, posicionX - 1, posicionY + 2);
+                if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                    regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                    return true;
+                }
+                regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+            } else {
+                if (table[posicionX - 1][posicionY + 2].isBlancas() != blancas) {
+                    piezaComida = tablero.obtenerPieza(posicionX - 1, posicionY + 2);
+                    cambiarPosicionPieza(tablero, posicionX - 1, posicionY + 2);
+                    if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                        regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                        return true;
+                    }
+                    regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                }
+            }
+
+        }
+        //izquierda lejos arriba
+
+        if ((posicionX - 1 >=0 && posicionY-2>=0)) {
+            if (table[posicionX - 1][posicionY - 2] == null) {
+                cambiarPosicion(tablero, posicionX - 1, posicionY - 2);
+                if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                    regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                    return true;
+                }
+                regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+
+            } else {
+                if (table[posicionX - 1][posicionY - 2].isBlancas() != blancas) {
+                    piezaComida = tablero.obtenerPieza(posicionX - 1, posicionY - 2);
+                    cambiarPosicionPieza(tablero, posicionX - 1, posicionY - 2);
+                    if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                        regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                        return true;
+                    }
+                    regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                }
+            }
+
+        }
+
+
+        //abajo lejos derecha
+        if ((posicionX +2<=7 && posicionY+1<=7)) {
+            if (table[posicionX + 2][posicionY + 1] == null) {
+                cambiarPosicion(tablero, posicionX + 2, posicionY + 1);
+                if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                    regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                    return true;
+                }
+                regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+            } else {
+                if (table[posicionX + 2][posicionY + 1].isBlancas() != blancas) {
+                    piezaComida = tablero.obtenerPieza(posicionX + 2, posicionY + 1);
+                    cambiarPosicionPieza(tablero, posicionX + 2, posicionY + 1);
+                    if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                        regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                        return true;
+                    }
+                    regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                }
+            }
+        }
+
+        //abajo lejos izquierda
+        if ((posicionX +2 <=7 && posicionY-1>=0)) {
+            if (table[posicionX + 2][posicionY - 1] == null) {
+                cambiarPosicion(tablero, posicionX + 2, posicionY - 1);
+                if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                    regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                    return true;
+                }
+                regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+            } else {
+                if (table[posicionX + 2][posicionY - 1].isBlancas() != blancas) {
+                    piezaComida = tablero.obtenerPieza(posicionX + 2, posicionY - 1);
+                    cambiarPosicionPieza(tablero, posicionX + 2, posicionY - 1);
+                    if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                        regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                        return true;
+                    }
+                    regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                }
+            }
+
+        }
+
+        // derecha lejos abajo
+        if ((posicionX + 1 <=7 && posicionY+2<=7)) {
+            if (table[posicionX + 1][posicionY + 2] == null) {
+                cambiarPosicion(tablero, posicionX + 1, posicionY + 2);
+                if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                    regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                    return true;
+                }
+                regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+            } else {
+                if (table[posicionX + 1][posicionY + 2].isBlancas() != blancas) {
+                    piezaComida = tablero.obtenerPieza(posicionX + 1, posicionY + 2);
+                    cambiarPosicionPieza(tablero, posicionX + 1, posicionY + 2);
+                    if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                        regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                        return true;
+                    }
+                    regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                }
+            }
+
+
+        }
+        //izquierda lejos abajo
+        if ((posicionX + 1 <=7 && posicionY-2>=0)) {
+            if (table[posicionX + 1][posicionY - 2] == null) {
+                cambiarPosicion(tablero, posicionX + 1, posicionY - 2);
+                if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                    regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                    return true;
+                }
+                regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+            } else {
+                if (table[posicionX + 1][posicionY - 2].isBlancas() != blancas) {
+                    piezaComida = tablero.obtenerPieza(posicionX + 1, posicionY - 2);
+                    cambiarPosicionPieza(tablero, posicionX + 1, posicionY - 2);
+                    if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                        regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                        return true;
+                    }
+                    regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                }
+            }
+        }
+        return false;
+
+
+    }
 
     public void imprimirCaballo() {
         if (this.blancas) {

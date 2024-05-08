@@ -1,28 +1,19 @@
 package Tablero;
-
-
 import Piezas.Pieza;
 import Piezas.Tipos.*;
-
 import java.util.Scanner;
-
 public class Tablero {
     private Pieza[][] table;
-
     public Tablero()
     {
         table = new Pieza[8][8];
     }
-
     public Pieza[][] getTable() {
         return table;
     }
-
     public void setTable(Pieza[][] table) {
         this.table = table;
     }
-
-
 
     public  void  Play(Scanner teclado){
 
@@ -34,7 +25,9 @@ public class Tablero {
       do {
           imprimirTablero();
           salir1=jugarPlayer1(teclado);
-
+        if (salir1==1 ){
+    break;
+        }
 
           imprimirTablero();
 
@@ -45,14 +38,14 @@ public class Tablero {
       }
 
     public void  startTablero(){
-        table[0][0] = new Torre(true,0,0) ;
-        table[0][1]=new Caballo(true,0,1);
-        table[0][2]=new Alfil(true);
-        table[0][3] = new Rey(true,0,3) ;
-        table[0][4]=new Reina(true);
-        table[0][5]=new Alfil(true);
+        table[5][0] = new Torre(false,5,0) ;
+       // table[0][1]=new Caballo(true,0,1);
+        table[0][1]=new Alfil(false,0,1);
+        table[0][0] = new Rey(true,0,0) ;
+        table[0][4]=new Reina(false,0,4);
+        table[0][5]=new Alfil(false,0,5);
         table[0][6]=new Caballo(true,0,6);
-        table[0][7] = new Torre(true,0,7) ;
+        table[6][1] = new Torre(false,6,1) ;
 /*
         for (int i =1;i<2;i++){
             for (int j=0; j<8;j++){
@@ -60,36 +53,27 @@ public class Tablero {
             }
         }
         table[1][7]= new  Peon(false,1,7);
-
-
         for (int i =2;i<6;i++){
             for (int j=0; j<8;j++){
                 table[i][j]=null;
             }
         }
-
-
         for (int i =6;i<7;i++){
             for (int j=0; j<8;j++){
                 table[i][j]=new Peon(false,i,j);
             }
         }
 */
-
-        table[7][0] = new Torre(false,7,0) ;
-        table[7][1]=new Caballo(false,7,1);
-        table[7][2]=new Alfil(false);
-        table[7][3] = new Rey(false,7,3) ;
-        table[7][4]=new Reina(false);
-        table[7][5]=new Alfil(false);
-        table[7][6]=new Caballo(false,7,6);
+        //table[6][3] = new Torre(false,6,3) ;
+        //table[7][1]=new Caballo(false,7,1);
+        //table[7][2]=new Alfil(false,7,2);
+        table[7][3] = new Rey(false,0,0) ;
+       // table[7][4]=new Reina(false,7,4);
+       // table[7][5]=new Alfil(false,7,5);
+        //table[7][6]=new Caballo(false,7,6);
         table[7][7] = new Torre(false,7,7) ;
 
     }
-
-
-
-
 
 
     public void imprimirTablero(){
@@ -156,17 +140,56 @@ public class Tablero {
 
 
     public int  jugarPlayer1(Scanner teclado) {
+      double contador=0;// si todas las piezas restantes devuelven falso aumentara en 1
+      int piezasRestantes= contarPiezasRestantes(true)-1; // si el contador es igual a las piezas restantes es jaque mate
+
         int num;
         if (obtenerPiezaReyBlanco(true).jaqueMateSinMovimientos(this, true)) {
-            System.out.println("gano jugador 2  ");
-            return 1;
+            for (int i=0; i<=7;i++){
+                for (int j = 0 ; j<=7;j++){
+                   if (table[i][j] != null && table[i][j].isBlancas()){
+                      if (table[i][j] instanceof Torre){
+                          if (((Torre) table[i][j]).protegerReyTorre(this, table[i][j].getPosicionX() ,table[i][j].getPosicionY(),true)== false){
+                                contador++;
+                          }
+                      }
+                       if (table[i][j] instanceof Reina) {
+                       if (((Reina) table[i][j]).protegerReyTorre(this, table[i][j].getPosicionX(), table[i][j].getPosicionY(), true) == false) {
+                               contador=contador+ 0.5;
+                           }
+
+                           if ( ((Reina) table[i][j]).protegerReyAlfil(this,table[i][j].getPosicionX(),table[i][j].getPosicionY(),true) ==false){
+                               contador=contador+ 0.5;
+                           }
+
+                       }
+                       if (table[i][j] instanceof Caballo){
+                           if (( table[i][j]).protegerRey(this, table[i][j].getPosicionX() ,table[i][j].getPosicionY(),true)== false){
+                               contador++;
+                           }
+                       }
+                       if (table[i][j] instanceof Alfil){
+                           if ( ((Alfil) table[i][j]).protegerReyAlfil(this,table[i][j].getPosicionX(),table[i][j].getPosicionY(),true) ==false){
+                               contador++;
+                           }
+                       }
+                       if (table[i][j] instanceof Peon){
+                           if ( ((Peon) table[i][j]).protegerRey(this,table[i][j].getPosicionX(),table[i][j].getPosicionY(),true) ==false){
+                               contador++;
+                           }
+                       }
+                   }
+                }
+            }
+            if (contador== piezasRestantes || contador==0){// falta añadir que la reina vale x dos movimientos
+                return 1;
+            }
         }
        /* if (obtenerPiezaReyBlanco(true).jaqueMateRodeadoPiezas(this,true)){
             System.out.println("gana jugador 2 ");
             return 1;
         }*/
 
-        else {
             boolean correcto = false;
             do {
                 System.out.println(" jugador 1 ");// blancas
@@ -192,7 +215,7 @@ public class Tablero {
                                 correcto = true;
                             }
                         } else if (table[posicionX][posicionY] instanceof Rey) {
-                            num = ((Rey) table[posicionX][posicionY]).movimientoRey(teclado,this);
+                            num = ((Rey) table[posicionX][posicionY]).elegirMovimiento(teclado,this);
                             if (num == 0) {
                                 correcto = true;
                             }
@@ -228,20 +251,40 @@ public class Tablero {
                 }
             }
             while (correcto == false);
-        }
+
             return 0;
     }
 
 
 
     public int jugarPlayer2(Scanner teclado){
+        double contador=0;// si todas las piezas restantes devuelven falso aumentara en 1
+        int piezasRestantes= contarPiezasRestantes(true); // si el contador es igual a las piezas restantes es jaque mate
+
         boolean correcto= false;
         int num;
-        if (obtenerPiezaReyBlanco(false).jaqueMateSinMovimientos(this, false)) {
-            System.out.println("gano jugador 2  ");
-            return 1;
+        if (obtenerPiezaReyBlanco(true).jaqueMateSinMovimientos(this, false)) {
+            for (int i=0; i<=7;i++){
+                for (int j = 0 ; j<=7;j++){
+                    if (table[i][j] != null && table[i][j].isBlancas()){
+                        if (table[i][j] instanceof Torre){
+                            if (((Torre) table[i][j]).protegerReyTorre(this, table[i][j].getPosicionX() ,table[i][j].getPosicionY(),true)== false){
+                                contador++;
+                            }
+                        }
+                        if (table[i][j] instanceof Reina) {
+                            if (((Reina) table[i][j]).protegerReyTorre(this, table[i][j].getPosicionX(), table[i][j].getPosicionY(), true) == false) {
+                                contador=contador+ 0.5;
+                            }
+                        }
+                    }
+                }
+            }
+            if (contador== piezasRestantes){// falta añadir que la reina vale x dos movimientos
+                return 1;
+            }
         }
-        else {
+
             do {
                 System.out.println(" jugador 2 ");
                 System.out.println("ingrese las coordenadas de la pieza");
@@ -262,7 +305,7 @@ public class Tablero {
                             correcto = true;
                         }
                     } else if (table[posicionX][posicionY] instanceof Rey) {
-                        num = ((Rey) table[posicionX][posicionY]).movimientoRey(teclado,this);
+                        num = ((Rey) table[posicionX][posicionY]).elegirMovimiento(teclado,this);
                         if (num == 0) {
                             correcto = true;
                         }
@@ -297,7 +340,7 @@ public class Tablero {
                 }
             }
             while (correcto == false);
-        }
+
         return 0;
         }
 
@@ -323,12 +366,6 @@ public Rey obtenerPiezaReyBlanco(Boolean blanco){
         return null;
 }
 
-
-
-
-
-
-
     public void dibujarLineas() {
         int n = ((12) + ((7) * 11));//table.length es 10
         System.out.print("    ");
@@ -338,8 +375,27 @@ public Rey obtenerPiezaReyBlanco(Boolean blanco){
         System.out.println();
     }
 
-
-
+    public int contarPiezasRestantes(boolean blanco){
+       int blancas=0;
+       int negras =0;
+        for (int i =0;i<=7;i++){
+            for (int j=0 ; j<=7;j++) {
+                if (table[i][j] != null) {
+                    if (table[i][j].isBlancas()) {
+                        blancas++;
+                    } else {
+                        negras++;
+                    }
+                }
+            }
+        }
+        if (blanco == true){
+            return blancas;
+        }
+        else {
+            return negras;
+        }
+    }
 
 
 }

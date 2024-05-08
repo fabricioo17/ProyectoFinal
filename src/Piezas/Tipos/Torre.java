@@ -42,4 +42,10 @@ public class Torre extends Pieza implements MovimientoHorizontalVertical {
         return 1;
             }
     }
+
+
+    @Override
+    public boolean protegerRey(Tablero tablero, int posicionX, int posicionY, boolean blanco) {
+        return false;
+    }
 }

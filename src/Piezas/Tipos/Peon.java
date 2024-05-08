@@ -33,7 +33,7 @@ public class Peon extends Pieza {
                     table[movimientoX][movimientoY].setPosicionX(movimientoX); //cambiamos la posicion de la nueva pieza movida, ya que aun mantenia la posicion anteiro
                     table[movimientoX][movimientoY].setPosicionY(movimientoY);
 
-                    if (table[movimientoX][movimientoY].identificarJacke(tablero, table[movimientoX][movimientoY].isBlancas(), rey.getPosicionX(), rey.getPosicionY())) {// si  aun asi sigue en jacke regresaremos todo a como estaba antes
+                    if (table[movimientoX][movimientoY].confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())) {// si  aun asi sigue en jacke regresaremos todo a como estaba antes
                         table[posicionX][posicionY] = table[movimientoX][movimientoY];
                         table[movimientoX][movimientoY] = null;
                         table[posicionX][posicionY].setPosicionX(posicionX);
@@ -58,14 +58,14 @@ public class Peon extends Pieza {
                     //--------------------TRANSFORMANDO PEON--------------------------------//
                     if (posicionX == 7 ) {// luego de mover el peon si la nueva posicion es 7 significa que podemos cambiar la pieza
                         table [movimientoX][movimientoY]=transformarPeon(table, teclado, movimientoX, movimientoY);
-                        if (identificarJacke(tablero,true, rey.getPosicionX(), rey.getPosicionY())){
+                        if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())){
                             regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                             return 3;
                         }
                         return 0;
                     }
 
-                    if (identificarJacke(tablero, true, rey.getPosicionX(), rey.getPosicionY())) {// si  aun asi sigue en jacke regresaremos todo a como estaba antes
+                    if (confirmarJaque(tablero,  rey.getPosicionX(), rey.getPosicionY())) {// si  aun asi sigue en jacke regresaremos todo a como estaba antes
                         table[posicionX][posicionY] = table[movimientoX][movimientoY];
                         table[movimientoX][movimientoY] = null;
                         table[posicionX][posicionY].setPosicionX(posicionX);
@@ -92,14 +92,14 @@ public class Peon extends Pieza {
                         //--------------------TRANSFORMANDO PEON--------------------------------//
                         if (posicionX == 7 ) {// luego de mover el peon si la nueva posicion es 7 significa que podemos cambiar la pieza
                             table [movimientoX][movimientoY]=transformarPeon(table, teclado, movimientoX, movimientoY);
-                            if (identificarJacke(tablero,true, rey.getPosicionX(), rey.getPosicionY())){
+                            if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())){
                                 regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                                 return 3;
                             }
                             return 0;
                         }
                         //-------------------------------------------------------------------------//
-                        if (identificarJacke(tablero, table[movimientoX][movimientoY].isBlancas(), rey.getPosicionX(), rey.getPosicionY())) {
+                        if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())) {
                             if (regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida) == true) {// si el valor es verdadero  habremos anulado el movimiento
                                 return 3;
                             }
@@ -130,7 +130,7 @@ public class Peon extends Pieza {
                     table[movimientoX][movimientoY].setPosicionX(movimientoX); //cambiamos la posicion de la nueva pieza movida, ya que aun mantenia la posicion anteiro
                     table[movimientoX][movimientoY].setPosicionY(movimientoY);
 
-                    if (table[movimientoX][movimientoY].identificarJacke(tablero, table[movimientoX][movimientoY].isBlancas(), rey.getPosicionX(), rey.getPosicionY())) {// si  aun asi sigue en jacke regresaremos todo a como estaba antes
+                    if (table[movimientoX][movimientoY].confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())) {// si  aun asi sigue en jacke regresaremos todo a como estaba antes
                         table[posicionX][posicionY] = table[movimientoX][movimientoY];
                         table[movimientoX][movimientoY] = null;
                         table[posicionX][posicionY].setPosicionX(posicionX);
@@ -145,19 +145,17 @@ public class Peon extends Pieza {
 //-------------------------------MOVIMIENTO SIMPLE----------------------------------//
             else if (posicionX - 1 == movimientoX && posicionY == movimientoY) {
                 if ((table[movimientoX][movimientoY] == null)) {
-                    table[movimientoX][movimientoY] = table[posicionX][posicionY];
-                    table[posicionX][posicionY] = null;
-                    table[movimientoX][movimientoY].setPosicionX(movimientoX); //cambiamos la posicion de la nueva pieza movida, ya que aun mantenia la posicion anteiro
-                    table[movimientoX][movimientoY].setPosicionY(movimientoY);
+                  cambiarPosicion(tablero,movimientoX,movimientoY);
+
                     if (posicionX == 0 ) {// luego de mover el peon si la nueva posicion es 7 significa que podemos cambiar la pieza
                         table [movimientoX][movimientoY]=transformarPeon(table, teclado, movimientoX, movimientoY);
-                        if (identificarJacke(tablero,false, rey.getPosicionX(), rey.getPosicionY())){
+                        if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())){
                             regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                             return 3;
                         }
                         return 0;
                     }
-                    if (table[movimientoX][movimientoY].identificarJacke(tablero, table[movimientoX][movimientoY].isBlancas(), rey.getPosicionX(), rey.getPosicionY())) {// si  aun asi sigue en jacke regresaremos todo a como estaba antes
+                    if (table[movimientoX][movimientoY].confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())) {// si  aun asi sigue en jacke regresaremos todo a como estaba antes
                         table[posicionX][posicionY] = table[movimientoX][movimientoY];
                         table[movimientoX][movimientoY] = null;
                         table[posicionX][posicionY].setPosicionX(posicionX);
@@ -174,19 +172,17 @@ public class Peon extends Pieza {
                 if (table[movimientoX][movimientoY] != null) {
                     if (table[posicionX][posicionY].isBlancas() != table[movimientoX][movimientoY].isBlancas()) {
                         piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
-                        table[movimientoX][movimientoY] = table[posicionX][posicionY];
-                        table[posicionX][posicionY] = null;
-                        table[movimientoX][movimientoY].setPosicionX(movimientoX); //cambiamos la posicion de la nueva pieza movida, ya que aun mantenia la posicion anteiro
-                        table[movimientoX][movimientoY].setPosicionY(movimientoY);
+                       cambiarPosicionPieza(tablero,movimientoX,movimientoY);
+
                         if (posicionX == 0 ) {// luego de mover el peon si la nueva posicion es 7 significa que podemos cambiar la pieza
                              table [movimientoX][movimientoY]=transformarPeon(table, teclado, movimientoX, movimientoY);
-                            if (identificarJacke(tablero,false, rey.getPosicionX(), rey.getPosicionY())){
+                            if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())){
                                 regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                                 return 3;
                             }
                             return 0;
                         }
-                        if (identificarJacke(tablero, table[movimientoX][movimientoY].isBlancas(), rey.getPosicionX(), rey.getPosicionY())) {
+                        if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())) {
                             if (regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida) == true) {// si el valor es verdadero  habremos anulado el movimiento
                                 return 3;
                             }
@@ -236,23 +232,124 @@ public class Peon extends Pieza {
                 System.out.println("1 torre");
                 System.out.println("2 alfil");
                 System.out.println("3 caballo");
+                 System.out.println("4 reina");
                 int opcion = teclado.nextInt();
                 switch (opcion) {
                         case 1:
                                 return new Torre(table[movimientoX][moviminetoY].isBlancas(),movimientoX,moviminetoY);
                         case 2:
-                                return new Alfil(table[movimientoX][moviminetoY].isBlancas());
+                                return new Alfil(table[movimientoX][moviminetoY].isBlancas(),movimientoX,moviminetoY);
 
                         case 3:
                                 return new Caballo(table[movimientoX][moviminetoY].isBlancas(),movimientoX,moviminetoY);
+
+                    case 4:
+                        return  new Reina(table[movimientoX][moviminetoY].isBlancas(),movimientoX,moviminetoY);
                         default:
                                 System.out.println("error");
                                 return null;
                 }
         }
 
+    @Override
+    public boolean protegerRey(Tablero tablero, int posicionX, int posicionY, boolean blanco) {
+        Pieza piezaComida;
+        Rey rey = tablero.obtenerPiezaReyBlanco(blanco);
+        Pieza[][] table = tablero.getTable();
+        // obtenemos el rey para que en cada movieminto veamos si podemos proteger al rey
+        int posicionOriginalX = posicionX;
+        int posicionOriginalY = posicionY;
 
-        public void imprimirPeon(){
+           //---------------hacia abajo----------------------//
+        if (blanco==true) {
+            if ((table[posicionX+1][posicionY] == null)) {
+                cambiarPosicion(tablero, posicionX + 1, posicionY );
+                if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY()) == false) {
+                    regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                    return true;
+                }
+                regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+            }
+
+            //-----------comer hacia izquierda
+            if (table[posicionX +1][posicionY-1] == null){
+                if (table[posicionX + 1][posicionY - 1].isBlancas() != blancas) {
+                    piezaComida = tablero.obtenerPieza(posicionX+ 1, posicionY - 1);
+                    cambiarPosicionPieza(tablero, posicionX + 1, posicionY -1);
+                    if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                        regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                        return true;
+                    }
+                    regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                }
+            }
+
+
+
+
+            //-----------comer hacia derecha
+            if (table[posicionX +1][posicionY+1] == null){
+                if (table[posicionX + 1][posicionY + 1].isBlancas() != blancas) {
+                    piezaComida = tablero.obtenerPieza(posicionX+ 1, posicionY + 1);
+                    cambiarPosicionPieza(tablero, posicionX + 1, posicionY +1);
+                    if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                        regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                        return true;
+                    }
+                    regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                }
+            }
+
+        }
+        else {
+//--------------------------hacia arriba
+            if ((table[posicionX-1][posicionY] == null)) {
+                cambiarPosicion(tablero, posicionX - 1, posicionY );
+                if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY()) == false) {
+                    regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                    return true;
+                }
+                regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+            }
+
+            //-----------comer hacia izquierda
+            if (table[posicionX -1][posicionY-1] == null){
+                if (table[posicionX + 1][posicionY - 1].isBlancas() != blancas) {
+                    piezaComida = tablero.obtenerPieza(posicionX- 1, posicionY - 1);
+                    cambiarPosicionPieza(tablero, posicionX - 1, posicionY -1);
+                    if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                        regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                        return true;
+                    }
+                    regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                }
+            }
+
+
+
+
+            //-----------comer hacia derecha
+            if (table[posicionX -1][posicionY+1] == null){
+                if (table[posicionX -1][posicionY + 1].isBlancas() != blancas) {
+                    piezaComida = tablero.obtenerPieza(posicionX- 1, posicionY + 1);
+                    cambiarPosicionPieza(tablero, posicionX - 1, posicionY +1);
+                    if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
+                        regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                        return true;
+                    }
+                    regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida);
+                }
+            }
+
+
+
+
+        }
+
+            return false;
+    }
+
+    public void imprimirPeon(){
                 if (this.blancas) {
                         System.out.print(red + "♙" + reset);
                 }

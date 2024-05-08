@@ -9,10 +9,14 @@ import java.util.Scanner;
 public class Reina extends Pieza implements MovimientoDiagonal, MovimientoHorizontalVertical {
 
 
-    public Reina(Boolean blancas) {
-        super(blancas);
+    public Reina(Boolean blancas, int posicionX, int posicionY) {
+        super(blancas,posicionX,posicionY);
     }
 
+    @Override
+    public boolean protegerRey(Tablero tablero, int posicionX, int posicionY, boolean blanco) {
+        return false;
+    }
 
     public int movimientoReina(Scanner teclado, Tablero table) {
         System.out.println("ingrese a que fila quiere mover la reina");

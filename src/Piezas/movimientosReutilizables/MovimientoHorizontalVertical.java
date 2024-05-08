@@ -2,8 +2,13 @@ package Piezas.movimientosReutilizables;
 
 import Piezas.Pieza;
 import Piezas.Tipos.Rey;
+import Piezas.Tipos.Torre;
 import Tablero.Tablero;
 
+
+/**
+ * si nos devuelve false, es porque el jaque ha sido neutralizado
+ */
 public interface MovimientoHorizontalVertical {
     default int movimientoVertical(Tablero tablero, int movimientoX, int movimientoY, int posicionX, int posicionY) {
        int posicionOriginalX= posicionX;
@@ -11,6 +16,7 @@ public interface MovimientoHorizontalVertical {
 
 Pieza piezaComida;
       Pieza  [][] table= tablero.getTable();
+
         Rey rey = tablero.obtenerPiezaReyBlanco(table[posicionOriginalX][posicionOriginalY].isBlancas());
         //horizontal
         if (tablero.obtenerPieza(posicionX,posicionY)!= tablero.obtenerPieza(movimientoX,movimientoY)) {// esto es para que no elija el mismo sitio de donde ya se encuentra
@@ -25,8 +31,8 @@ Pieza piezaComida;
 //------------------------------------------------cambiat de posicion ---------------------------------------------------------//
                                     table[posicionX][posicionY].cambiarPosicion(tablero,movimientoX,movimientoY);
 
-                                    if(table[movimientoX][movimientoY].identificarJacke(tablero,table[movimientoX][movimientoY].isBlancas(),rey.getPosicionX(),rey.getPosicionY())){// si  aun asi sigue en jacke regresaremos todo table como estaba antes
-                                        table[posicionX][posicionY].regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
+                                    if(table[movimientoX][movimientoY].confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){// si  aun asi sigue en jacke regresaremos todo table como estaba antes
+                                        table[movimientoX][movimientoY].regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                                         return 3;
                                     }
 
@@ -35,32 +41,35 @@ Pieza piezaComida;
 
                                 //-------------------------------comer pieza--------------//
                                 if ((i+1 == movimientoY || j-1 == movimientoY) && table[posicionX][movimientoY] != null) { // si el movimineto conuerda con un lugar donde no sea nulo, identificara el dueño de la pieza y si es de otro se la come
-                                    if (table[movimientoX][movimientoY].isBlancas() != table[posicionX][posicionY].isBlancas()) {
-                                    // guardamos en una variable la pieza comida ya que si aun seguimos en jacke debemos regresar todo table la normalidad
-                                        piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
-//------------------------------------------------cambiar de posicion con una pieza -------------------------------------------------------------------------//
-                                        table[movimientoX][movimientoY].cambiarPosicionPieza(tablero,movimientoX,movimientoY);
+                                    if (table[movimientoX][movimientoY].isBlancas() != table[posicionX][posicionY].isBlancas())
+                                        {
+                                        // guardamos en una variable la pieza comida ya que si aun seguimos en jacke debemos regresar todo table la normalidad
+                                            piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
+    //------------------------------------------------cambiar de posicion con una pieza -------------------------------------------------------------------------//
+                                            table[posicionX][posicionY].cambiarPosicionPieza(tablero,movimientoX,movimientoY);
 
 
-                                        //----------------------------------verificar jaque-------------------------------------------//
-                                        if ( table[movimientoX][movimientoY].identificarJacke(tablero,table[movimientoX][movimientoY].isBlancas(),rey.getPosicionX(),rey.getPosicionY()))//aqui colocamos la nuevaposicion del rey
-                                        {// es verdad si luego de mover la pieza aun seguimos en jacke, entonces abajo debemos regresar el movimiento
+                                            //----------------------------------verificar jaque-------------------------------------------//
+                                            if ( table[movimientoX][movimientoY].confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY()))//aqui colocamos la nuevaposicion del rey
+                                            {// es verdad si luego de mover la pieza aun seguimos en jacke, entonces abajo debemos regresar el movimiento
 
-                                                       //-----------------------------------regresar pieza comida------------------------------------//
-                                                        if (table[movimientoX][movimientoY].regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida) == true) {// si el valor es verdadero  habremos anulado el movimiento
+                                                           //-----------------------------------regresar pieza comida------------------------------------//
+                                                            if (table[movimientoX][movimientoY].regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida) == true) {// si el valor es verdadero  habremos anulado el movimiento
 
-                                                            return 3;
+                                                                return 3;
 
-                                                        }
+                                                            }
+                                            }
+                                            else
+                                            {
+                                                return 1;// pieza comida
+                                            }
+
                                         }
-                                        else {
-                                            return 1;// pieza comida
-                                        }
-
-                                    }
-                                    else {
+                                    else
+                                        {
                                         return 2;// no se puede comer pieza propia
-                                    }
+                                         }
                                 }
 
                             }
@@ -82,8 +91,8 @@ Pieza piezaComida;
                                 table[posicionX][posicionY].cambiarPosicion(tablero,movimientoX,movimientoY);
 
 
-                                    if(table[movimientoX][movimientoY].identificarJacke(tablero,table[movimientoX][movimientoY].isBlancas(),rey.getPosicionX(),rey.getPosicionY())){// si  aun asi sigue en jacke regresaremos todo table como estaba antes
-                                        table[posicionX][posicionY].regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
+                                    if(table[movimientoX][movimientoY].confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){// si  aun asi sigue en jacke regresaremos todo table como estaba antes
+                                        table[movimientoX][movimientoY].regresarMovimiento(tablero,posicionOriginalX,posicionOriginalY);
                                         return 3;// aun ahy jacke, error
                                     }
 
@@ -95,9 +104,10 @@ Pieza piezaComida;
 
                                     if (table[movimientoX][movimientoY].isBlancas() != table[posicionX][posicionY].isBlancas()) {
                                         piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
-                                        table[movimientoX][movimientoY].cambiarPosicionPieza(tablero,movimientoX,movimientoY);
 
-                                        if ( table[movimientoX][movimientoY].identificarJacke(tablero,table[movimientoX][movimientoY].isBlancas(),rey.getPosicionX(),rey.getPosicionY()))
+                                        table[posicionX][posicionY].cambiarPosicionPieza(tablero,movimientoX,movimientoY);
+
+                                        if ( table[movimientoX][movimientoY].confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())) // ahora la torre es ta pieza, ya que le acmbiamos de posicion
                                         {// es verdad si luego de mover la pieza aun seguimos en jacke, entonces abajo debemos regresar el movimiento
                                             if (table[movimientoX][movimientoY].regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, piezaComida) == true) {// si el valor es verdadero  habremos anulado el movimiento
 
@@ -123,6 +133,166 @@ Pieza piezaComida;
 
 
 
+
+// luego de ver que el rey no se puede mover en ningun lado viene ahora la proteccion de cada pieza si ninguna pieza sobrante logra protege al rey, seera jaque mate
+
+    /**
+     *
+     * @param tablero
+     * @param posicionX
+     * @param posicionY
+     * @param blanco
+     * @return devuelve un true si es que logramos proteger el rey, para elloprimero veremos si logra proteger hacia arriba si no lo logra empieza hacia abajo y luego derecha izquierda hasta encontrar el true, si no lo encunetra devuelve un flase
+     */
+    default boolean protegerReyTorre(Tablero tablero, int posicionX, int posicionY, boolean blanco){
+ Pieza comida;
+ Rey rey = tablero.obtenerPiezaReyBlanco(blanco);
+ int posicionReyX= rey.getPosicionX();
+ int posicionReyY= rey.getPosicionY();
+   Pieza [][] table = tablero.getTable();
+   Pieza actual= table[posicionX][posicionY];
+    // obtenemos el rey para que en cada movieminto veamos si podemos proteger al rey
+    int posicionOriginalX= posicionX;
+    int posicionOriginalY=posicionY;
+
+//-----------hacai arriba---------------------//
+    for (int i =posicionOriginalX-1;i>=0;i-- ){
+
+        if (table[i][posicionY] == null) {
+            actual.cambiarPosicion(tablero,i,posicionY);
+            if ((actual.confirmarJaque(tablero,  posicionReyX,posicionReyY) == false)) {// si llega a ser falso es porque no hay jague hacia arriba
+                actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                return true; // logramos bloquear el jaque
+            }
+            actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+        }
+        else {
+            if (table[posicionX][posicionY].isBlancas() !=table[i][posicionY].isBlancas()) {
+
+                comida = tablero.obtenerPieza(i, posicionY);// obtenemos la pieza enemiga que se encuentra en la parte de arriba
+                actual.cambiarPosicion(tablero,i,posicionY);
+
+                if ((actual.confirmarJaque(tablero, posicionReyX,posicionReyY) == false)) { // la posicion en esta pieza de rey ya cambio y ahora es la poisicion original-1
+                    actual.regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, comida);
+                    return true;
+                }
+                actual.regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, comida);
+            }
+            else {
+                break; // si encontramos una pieza nuestra  ya no podremos subir mas por ende rompemos el bucle
+            }
+        }
+    }
+
+
+
+
+    //-----------hacai abajo---------------------//
+    for (int i =posicionOriginalX+1;i<=7;i++ ){
+
+        if (table[i][posicionY] == null) {
+            actual.cambiarPosicion(tablero,i,posicionY);
+            if ((actual.confirmarJaque(tablero, posicionReyX,posicionReyY) == false)) {// si llega a ser falso es porque no hay jague hacia arriba
+                actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                return true; // logramos bloquear el jaque
+            }
+            actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+        }
+        else {
+            if (table[posicionX][posicionY].isBlancas() !=table[i][posicionY].isBlancas()) {
+
+                comida = tablero.obtenerPieza(i, posicionY);// obtenemos la pieza enemiga que se encuentra en la parte de arriba
+                actual.cambiarPosicion(tablero,i,posicionY);
+
+                if ((actual.confirmarJaque(tablero, posicionReyX,posicionReyY) == false)) { // la posicion en esta pieza de rey ya cambio y ahora es la poisicion original-1
+                    actual.regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, comida);
+                    return true;
+                }
+                actual.regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, comida); //añadir un break ya que si hay una pieza enemiga no puede avanzar masy
+            }
+            else {
+                break; // si encontramos una pieza nuestra  ya no podremos subir mas por ende rompemos el bucle
+            }
+        }
+    }
+
+//-----------hacai derecha---------------------//
+    for (int i =posicionOriginalY+1;i<=7;i++ ){
+
+        if (table[posicionX][i] == null) {
+            actual.cambiarPosicion(tablero,posicionX,i);
+            if ((actual.confirmarJaque(tablero, posicionReyX,posicionReyY) == false)) {// si llega a ser falso es porque no hay jague hacia arriba
+                actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                return true; // logramos bloquear el jaque
+            }
+            actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+        }
+        else {
+            if (table[posicionX][posicionY].isBlancas() !=table[posicionX][i].isBlancas()) {
+
+                comida = tablero.obtenerPieza(posicionX, i);// obtenemos la pieza enemiga que se encuentra en la parte de arriba
+                actual.cambiarPosicion(tablero,posicionX,i);// en movimientos la posicionX se mantiene igual ya que solo cambia la i
+
+                if ((actual.confirmarJaque(tablero, posicionReyX,posicionReyY) == false)) { // la posicion en esta pieza de rey ya cambio y ahora es la poisicion original-1
+                    actual.regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, comida);
+                    return true;
+                }
+                actual.regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, comida);
+            }
+            else {
+                break; // si encontramos una pieza nuestra  ya no podremos subir mas por ende rompemos el bucle
+            }
+        }
+    }
+
+
+//-----------hacai izquierda---------------------//
+    for (int i =posicionOriginalY-1;i>=0;i-- ){
+
+        if (table[posicionX][i] == null) {
+            actual.cambiarPosicion(tablero,posicionX,i);
+            if ((actual.confirmarJaque(tablero, posicionReyX,posicionReyY) == false)) {// si llega a ser falso es porque no hay jague hacia arriba
+                actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+                return true; // logramos bloquear el jaque
+            }
+            actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
+        }
+        else {
+            if (table[posicionX][posicionY].isBlancas() !=table[posicionX][i].isBlancas()) {
+
+                comida = tablero.obtenerPieza(posicionX, i);// obtenemos la pieza enemiga que se encuentra en la parte de arriba
+                actual.cambiarPosicion(tablero,posicionX,i);// en movimientos la posicionX se mantiene igual ya que solo cambia la i
+
+                if ((actual.confirmarJaque(tablero, posicionReyX,posicionReyY) == false)) { // la posicion en esta pieza de rey ya cambio y ahora es la poisicion original-1
+                    actual.regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, comida);
+                    return true;
+                }
+                actual.regresarPiezaComida(tablero, posicionOriginalX, posicionOriginalY, comida);
+            }
+            else {
+                break; // si encontramos una pieza nuestra  ya no podremos subir mas por ende rompemos el bucle
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    return false;
+}
 
 
 }

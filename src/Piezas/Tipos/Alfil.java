@@ -8,13 +8,15 @@ import java.util.Scanner;
 
 public class Alfil extends Pieza  implements MovimientoDiagonal {
 
-    public Alfil(boolean blancas) {
-        super(blancas);
+    public Alfil(boolean blancas,int posicionX,int posicionY) {
+        super(blancas,posicionX,posicionY);
     }
 
 
-
-
+    @Override
+    public boolean protegerRey(Tablero tablero, int posicionX, int posicionY, boolean blanco) {
+        return false;
+    }
 
     public  int movimientoAlfil(Scanner teclado, Tablero table) {
         System.out.println("ingrese a que fila quiere mover el alfil");
