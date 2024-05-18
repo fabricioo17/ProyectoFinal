@@ -45,7 +45,7 @@ int opcion=  movimientoDiagonal(table,x,y,posicionX,posicionY);
 
 
     public void imprimirAlfil(){
-        if (this.blancas) {
+        if (this.roja) {
             System.out.print(red + "♗" + reset);
         }
         else {
@@ -53,6 +53,10 @@ int opcion=  movimientoDiagonal(table,x,y,posicionX,posicionY);
         }
     }
 
+    public String mostrarDatosAlfil(){
 
+
+        return toString() + ",Alfil";
+    }
 
 }

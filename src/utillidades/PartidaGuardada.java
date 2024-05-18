@@ -1,7 +1,7 @@
-import Piezas.Pieza;
+package utillidades;
+import Piezas.*;
 import Piezas.Tipos.*;
-import Tablero.Tablero;
-
+import Tablero.*;
 import java.io.*;
 
 public class PartidaGuardada {
@@ -21,19 +21,48 @@ cargarPartida(tablero);
         for (int i=0;i<=7;i++){
             for (int j=0;j<=7;j++) {
                 if (table[i][j] instanceof Caballo){
-                    Caballo actual = (Caballo) table[i][j];
-                String contenido = actual.mostrarDatos();
-                try {
-                    FileWriter sobreEscrbir = new FileWriter(fichero,true);// true append es para no machacar la informacion obtenida
-                    sobreEscrbir.write(contenido + "\n");
-                    sobreEscrbir.close();
-                } catch (IOException ie) {
-                    System.out.println("no se logro subir los datos");
+                    String contenido = ((Caballo) table[i][j]).mostrarDatos();
+                guardarDatosPieza(contenido);
+                 }
+                if (table[i][j] instanceof Rey){
+                    String contenido = ((Rey) table[i][j]).mostrarDatosRey();
+                    guardarDatosPieza(contenido);
                 }
-            }
+                if (table[i][j] instanceof Reina){
+                    String contenido = ((Reina) table[i][j]).mostrarDatosReina();
+                    guardarDatosPieza(contenido);
+                }
+                if (table[i][j] instanceof Torre){
+                    String contenido = ((Torre) table[i][j]).mostrarDatosTorre();
+                    guardarDatosPieza(contenido);
+                }
+                if (table[i][j] instanceof Alfil){
+                    String contenido = ((Alfil) table[i][j]).mostrarDatosAlfil();
+                    guardarDatosPieza(contenido);
+                }
             }
         }
 
+    }
+
+    public static void guardarDatosPieza(String contenido){;
+        try {
+            FileWriter sobreEscrbir = new FileWriter(fichero,true);// true append es para no machacar la informacion obtenida
+            sobreEscrbir.write(contenido + "\n");
+            sobreEscrbir.close();
+        } catch (IOException ie) {
+            System.out.println("no se logro subir los datos");
+        }
+    }
+
+    public  static void  borrarDatos(){
+        try {
+            FileWriter sobreEscrbir = new FileWriter(fichero);// true append es para no machacar la informacion obtenida
+            sobreEscrbir.write("");
+            sobreEscrbir.close();
+        } catch (IOException ie) {
+            System.out.println("no se logro subir los datos");
+        }
     }
 
     public static void cargarPartida(Tablero tablero){
@@ -68,6 +97,8 @@ cargarPartida(tablero);
         catch (Exception e ){
             System.out.println("no hay registro de ese jugador");
         }
+    //-------------ahora borrare lap partida guarada ---------- por si quieren volver a guardar
+            borrarDatos();
 
 
     }
@@ -84,6 +115,21 @@ cargarPartida(tablero);
 public static Pieza cargarPieza(String tipo,boolean rojas, int possicionX, int posicionY){
     if (tipo.compareToIgnoreCase("caballo")==0){
             return  new Caballo(rojas,possicionX,posicionY);
+    }
+    if (tipo.compareToIgnoreCase("torre")==0){
+        return  new Torre(rojas,possicionX,posicionY);
+    }
+    if (tipo.compareToIgnoreCase("rey")==0){
+        return  new Rey(rojas,possicionX,posicionY);
+    }
+    if (tipo.compareToIgnoreCase("alfil")==0){
+        return  new Alfil(rojas,possicionX,posicionY);
+    }
+    if (tipo.compareToIgnoreCase("reina")==0){
+        return  new Reina(rojas,possicionX,posicionY);
+    }
+    if (tipo.compareToIgnoreCase("peon")==0){
+        return  new Peon(rojas,possicionX,posicionY);
     }
 return null;
 }

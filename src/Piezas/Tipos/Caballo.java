@@ -37,7 +37,7 @@ public class Caballo extends Pieza {
         Pieza[][] table = tablero.getTable();
         int posicionOriginalX= posicionX;
         int posicionOriginalY=posicionY;
-        Rey rey = tablero.obtenerPiezaReyBlanco(table[posicionOriginalX][posicionOriginalY].isBlancas());
+        Rey rey = tablero.obtenerPiezaReyBlanco(table[posicionOriginalX][posicionOriginalY].isRoja());
         Pieza piezaComida;
 
          // arriba derecha lejos
@@ -50,7 +50,7 @@ public class Caballo extends Pieza {
                     }
                     return  0;
                 }
-                if (table[movimientoX][movimientoY] != null &&table[movimientoX][movimientoY].isBlancas()!=blancas){
+                if (table[movimientoX][movimientoY] != null &&table[movimientoX][movimientoY].isRoja()!= roja){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
                     if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
@@ -72,7 +72,7 @@ public class Caballo extends Pieza {
                     }
                     return  0;
                 }
-                if (table[posicionX - 2][posicionY - 1] instanceof Pieza  &&table[movimientoX][movimientoY].isBlancas()!=blancas){
+                if (table[posicionX - 2][posicionY - 1] instanceof Pieza  &&table[movimientoX][movimientoY].isRoja()!= roja){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
                     if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
@@ -97,7 +97,7 @@ public class Caballo extends Pieza {
                     }
                     return  0;
                 }
-                if (table[posicionX -1][posicionY + 2] instanceof Pieza  &&table[movimientoX][movimientoY].isBlancas()!=blancas){
+                if (table[posicionX -1][posicionY + 2] instanceof Pieza  &&table[movimientoX][movimientoY].isRoja()!= roja){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
                     if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
@@ -120,7 +120,7 @@ public class Caballo extends Pieza {
                     }
                     return  0;
                 }
-                if (table[posicionX -1][posicionY - 2] instanceof Pieza  &&table[movimientoX][movimientoY].isBlancas()!=blancas){
+                if (table[posicionX -1][posicionY - 2] instanceof Pieza  &&table[movimientoX][movimientoY].isRoja()!= roja){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
                     if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
@@ -144,7 +144,7 @@ public class Caballo extends Pieza {
                     }
                     return  0;
                 }
-                if (table[posicionX + 2][posicionY + 1] != null  &&table[movimientoX][movimientoY].isBlancas()!=blancas){
+                if (table[posicionX + 2][posicionY + 1] != null  &&table[movimientoX][movimientoY].isRoja()!= roja){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                    cambiarPosicionPieza(tablero,movimientoX,movimientoY);
                    if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
@@ -166,7 +166,7 @@ public class Caballo extends Pieza {
                     }
                     return  0;
                 }
-                if (table[posicionX + 2][posicionY - 1] != null  &&table[movimientoX][movimientoY].isBlancas()!=blancas){
+                if (table[posicionX + 2][posicionY - 1] != null  &&table[movimientoX][movimientoY].isRoja()!= roja){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
                     if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
@@ -190,7 +190,7 @@ public class Caballo extends Pieza {
                 }
 
 
-                if (table[posicionX +1][posicionY + 2] instanceof Pieza  && table[movimientoX][movimientoY].isBlancas()!=blancas){
+                if (table[posicionX +1][posicionY + 2] instanceof Pieza  && table[movimientoX][movimientoY].isRoja()!= roja){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
                     if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
@@ -213,7 +213,7 @@ public class Caballo extends Pieza {
                     }
                     return  0;
                 }
-                if (table[posicionX +1][posicionY - 2] instanceof Pieza &&table[movimientoX][movimientoY].isBlancas()!=blancas){
+                if (table[posicionX +1][posicionY - 2] instanceof Pieza &&table[movimientoX][movimientoY].isRoja()!= roja){
                     piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                     cambiarPosicionPieza(tablero,movimientoX,movimientoY);
                     if (confirmarJaque(tablero,rey.getPosicionX(),rey.getPosicionY())){
@@ -244,7 +244,7 @@ if (posicionX - 2 >=0 && posicionY+1<=7) {
         }
         regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
     } else {
-        if (table[posicionX - 2][posicionY + 1].isBlancas() != blancas) {
+        if (table[posicionX - 2][posicionY + 1].isRoja() != roja) {
             piezaComida = tablero.obtenerPieza(posicionX - 2, posicionY + 1);
             cambiarPosicionPieza(tablero, posicionX - 2, posicionY + 1);
             if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
@@ -267,7 +267,7 @@ if (posicionX - 2 >=0 && posicionY+1<=7) {
                             }
                             regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
                         } else {
-                            if (table[posicionX - 2][posicionY - 1].isBlancas() != blancas) {
+                            if (table[posicionX - 2][posicionY - 1].isRoja() != roja) {
                                 piezaComida = tablero.obtenerPieza(posicionX - 2, posicionY - 1);
                                 cambiarPosicionPieza(tablero, posicionX - 2, posicionY - 1);
                                 if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
@@ -290,7 +290,7 @@ if (posicionX - 2 >=0 && posicionY+1<=7) {
                 }
                 regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
             } else {
-                if (table[posicionX - 1][posicionY + 2].isBlancas() != blancas) {
+                if (table[posicionX - 1][posicionY + 2].isRoja() != roja) {
                     piezaComida = tablero.obtenerPieza(posicionX - 1, posicionY + 2);
                     cambiarPosicionPieza(tablero, posicionX - 1, posicionY + 2);
                     if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
@@ -314,7 +314,7 @@ if (posicionX - 2 >=0 && posicionY+1<=7) {
                 regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
 
             } else {
-                if (table[posicionX - 1][posicionY - 2].isBlancas() != blancas) {
+                if (table[posicionX - 1][posicionY - 2].isRoja() != roja) {
                     piezaComida = tablero.obtenerPieza(posicionX - 1, posicionY - 2);
                     cambiarPosicionPieza(tablero, posicionX - 1, posicionY - 2);
                     if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
@@ -338,7 +338,7 @@ if (posicionX - 2 >=0 && posicionY+1<=7) {
                 }
                 regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
             } else {
-                if (table[posicionX + 2][posicionY + 1].isBlancas() != blancas) {
+                if (table[posicionX + 2][posicionY + 1].isRoja() != roja) {
                     piezaComida = tablero.obtenerPieza(posicionX + 2, posicionY + 1);
                     cambiarPosicionPieza(tablero, posicionX + 2, posicionY + 1);
                     if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
@@ -360,7 +360,7 @@ if (posicionX - 2 >=0 && posicionY+1<=7) {
                 }
                 regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
             } else {
-                if (table[posicionX + 2][posicionY - 1].isBlancas() != blancas) {
+                if (table[posicionX + 2][posicionY - 1].isRoja() != roja) {
                     piezaComida = tablero.obtenerPieza(posicionX + 2, posicionY - 1);
                     cambiarPosicionPieza(tablero, posicionX + 2, posicionY - 1);
                     if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
@@ -383,7 +383,7 @@ if (posicionX - 2 >=0 && posicionY+1<=7) {
                 }
                 regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
             } else {
-                if (table[posicionX + 1][posicionY + 2].isBlancas() != blancas) {
+                if (table[posicionX + 1][posicionY + 2].isRoja() != roja) {
                     piezaComida = tablero.obtenerPieza(posicionX + 1, posicionY + 2);
                     cambiarPosicionPieza(tablero, posicionX + 1, posicionY + 2);
                     if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
@@ -406,7 +406,7 @@ if (posicionX - 2 >=0 && posicionY+1<=7) {
                 }
                 regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
             } else {
-                if (table[posicionX + 1][posicionY - 2].isBlancas() != blancas) {
+                if (table[posicionX + 1][posicionY - 2].isRoja() != roja) {
                     piezaComida = tablero.obtenerPieza(posicionX + 1, posicionY - 2);
                     cambiarPosicionPieza(tablero, posicionX + 1, posicionY - 2);
                     if (confirmarJaque(tablero, rey.getPosicionX(), rey.getPosicionY())==false) {
@@ -422,14 +422,23 @@ if (posicionX - 2 >=0 && posicionY+1<=7) {
 
     }
 
-    public void imprimirCaballo() {
-        if (this.blancas) {
+    public String imprimirCaballo() {
+        if (this.roja) {
             System.out.print(red + "♘" + reset);
+            return red + "♘" + reset;
         } else {
             System.out.print(green + "♘" + reset);
+        return green + "♘" + reset;
         }
     }
 
+
+
+    public String mostrarDatos(){
+
+
+        return toString() + ",Caballo";
+    }
 }
 
 

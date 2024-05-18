@@ -2,7 +2,6 @@ package Piezas.movimientosReutilizables;
 
 import Piezas.Pieza;
 import Piezas.Tipos.Rey;
-import Piezas.Tipos.Torre;
 import Tablero.Tablero;
 
 
@@ -17,7 +16,7 @@ public interface MovimientoHorizontalVertical {
 Pieza piezaComida;
       Pieza  [][] table= tablero.getTable();
 
-        Rey rey = tablero.obtenerPiezaReyBlanco(table[posicionOriginalX][posicionOriginalY].isBlancas());
+        Rey rey = tablero.obtenerPiezaReyBlanco(table[posicionOriginalX][posicionOriginalY].isRoja());
         //horizontal
         if (tablero.obtenerPieza(posicionX,posicionY)!= tablero.obtenerPieza(movimientoX,movimientoY)) {// esto es para que no elija el mismo sitio de donde ya se encuentra
             if (posicionX == movimientoX) {// si se mueve en la misma fila
@@ -41,7 +40,7 @@ Pieza piezaComida;
 
                                 //-------------------------------comer pieza--------------//
                                 if ((i+1 == movimientoY || j-1 == movimientoY) && table[posicionX][movimientoY] != null) { // si el movimineto conuerda con un lugar donde no sea nulo, identificara el dueño de la pieza y si es de otro se la come
-                                    if (table[movimientoX][movimientoY].isBlancas() != table[posicionX][posicionY].isBlancas())
+                                    if (table[movimientoX][movimientoY].isRoja() != table[posicionX][posicionY].isRoja())
                                         {
                                         // guardamos en una variable la pieza comida ya que si aun seguimos en jacke debemos regresar todo table la normalidad
                                             piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
@@ -102,7 +101,7 @@ Pieza piezaComida;
 //---------------------------------------comer pieza envertical-----------------------------------------------------------//
                                 if ((i -1== movimientoX || j+1 == movimientoX) && table[movimientoX][posicionY] != null) { // si el movimineto conuerda con un lugar donde no sea nulo, identificara el dueño de la pieza y si es de otro se la come
 
-                                    if (table[movimientoX][movimientoY].isBlancas() != table[posicionX][posicionY].isBlancas()) {
+                                    if (table[movimientoX][movimientoY].isRoja() != table[posicionX][posicionY].isRoja()) {
                                         piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
 
                                         table[posicionX][posicionY].cambiarPosicionPieza(tablero,movimientoX,movimientoY);
@@ -167,7 +166,7 @@ Pieza piezaComida;
             actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
         }
         else {
-            if (table[posicionX][posicionY].isBlancas() !=table[i][posicionY].isBlancas()) {
+            if (table[posicionX][posicionY].isRoja() !=table[i][posicionY].isRoja()) {
 
                 comida = tablero.obtenerPieza(i, posicionY);// obtenemos la pieza enemiga que se encuentra en la parte de arriba
                 actual.cambiarPosicion(tablero,i,posicionY);
@@ -199,7 +198,7 @@ Pieza piezaComida;
             actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
         }
         else {
-            if (table[posicionX][posicionY].isBlancas() !=table[i][posicionY].isBlancas()) {
+            if (table[posicionX][posicionY].isRoja() !=table[i][posicionY].isRoja()) {
 
                 comida = tablero.obtenerPieza(i, posicionY);// obtenemos la pieza enemiga que se encuentra en la parte de arriba
                 actual.cambiarPosicion(tablero,i,posicionY);
@@ -228,7 +227,7 @@ Pieza piezaComida;
             actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
         }
         else {
-            if (table[posicionX][posicionY].isBlancas() !=table[posicionX][i].isBlancas()) {
+            if (table[posicionX][posicionY].isRoja() !=table[posicionX][i].isRoja()) {
 
                 comida = tablero.obtenerPieza(posicionX, i);// obtenemos la pieza enemiga que se encuentra en la parte de arriba
                 actual.cambiarPosicion(tablero,posicionX,i);// en movimientos la posicionX se mantiene igual ya que solo cambia la i
@@ -258,7 +257,7 @@ Pieza piezaComida;
             actual.regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
         }
         else {
-            if (table[posicionX][posicionY].isBlancas() !=table[posicionX][i].isBlancas()) {
+            if (table[posicionX][posicionY].isRoja() !=table[posicionX][i].isRoja()) {
 
                 comida = tablero.obtenerPieza(posicionX, i);// obtenemos la pieza enemiga que se encuentra en la parte de arriba
                 actual.cambiarPosicion(tablero,posicionX,i);// en movimientos la posicionX se mantiene igual ya que solo cambia la i
@@ -274,23 +273,6 @@ Pieza piezaComida;
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return false;
 }
 

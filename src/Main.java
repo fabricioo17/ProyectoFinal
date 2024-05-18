@@ -1,17 +1,25 @@
-import Tablero.*;
-import java.util.Scanner;
+import Jugadores.Jugador;
+import utillidades.*;
+import Tablero.Tablero;
 
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
-        Tablero nuevo = new Tablero();
-      /*  System.out.println("bienvenidos ");
-        System.out.println("jugador 1");
-        Usuario jugador1  = new Usuario(teclado);
-        System.out.println("jugador 2 :");
-        Usuario jugador2= new Usuario(teclado);*/
-        nuevo.Play(teclado);
+        Scanner teclado= new Scanner(System.in);
+        Tablero tablero = new Tablero();
+         tablero.startTablero();
+        System.out.println("bienvenidoos");
+        System.out.println("jugador 1 ingrese sus datos ");
+         Jugador jugador1= new Jugador(teclado,true);
+        System.out.println("jugador 2 ingrese sus datos ");
+        Jugador jugador2= new Jugador(teclado,false);
+        tablero.play(teclado);
+        System.out.println("gracias por jugar");
 
+
+
+      tablero.playGuardada(teclado);
     }
+
 }

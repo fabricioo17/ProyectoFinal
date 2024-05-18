@@ -60,7 +60,7 @@ public class Rey extends Pieza{
                    }
                    ///-------------comer pieza---------------------//
                     else {
-                       if (table[movimientoX][movimientoY].isBlancas() != this.blancas && !(table[movimientoX][movimientoY] instanceof  Rey)) {
+                       if (table[movimientoX][movimientoY].isRoja() != this.roja && !(table[movimientoX][movimientoY] instanceof  Rey)) {
                            piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                            table[movimientoX][movimientoY] = table[posicionX][posicionY];
                            table[posicionX][posicionY] = null;
@@ -97,7 +97,7 @@ public class Rey extends Pieza{
                        return 0;
                    }
                    else {
-                       if (table[movimientoX][movimientoY].isBlancas() != this.blancas && !(table[movimientoX][movimientoY] instanceof  Rey)) {
+                       if (table[movimientoX][movimientoY].isRoja() != this.roja && !(table[movimientoX][movimientoY] instanceof  Rey)) {
                            piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                            table[movimientoX][movimientoY] = table[posicionX][posicionY];
                            table[posicionX][posicionY] = null;
@@ -133,7 +133,7 @@ public class Rey extends Pieza{
                    return 0;
                }
                else {
-                   if (table[movimientoX][movimientoY].isBlancas() != this.blancas && !(table[movimientoX][movimientoY] instanceof  Rey)) {
+                   if (table[movimientoX][movimientoY].isRoja() != this.roja && !(table[movimientoX][movimientoY] instanceof  Rey)) {
                        piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                        table[movimientoX][movimientoY] = table[posicionX][posicionY];
                        table[posicionX][posicionY] = null;
@@ -168,7 +168,7 @@ public class Rey extends Pieza{
                    return 0;
                }
                else {
-                   if (table[movimientoX][movimientoY].isBlancas() != this.blancas && !(table[movimientoX][movimientoY] instanceof  Rey)) {
+                   if (table[movimientoX][movimientoY].isRoja() != this.roja && !(table[movimientoX][movimientoY] instanceof  Rey)) {
                        piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                        table[movimientoX][movimientoY] = table[posicionX][posicionY];
                        table[posicionX][posicionY] = null;
@@ -202,7 +202,7 @@ public class Rey extends Pieza{
                    return 0;
                }
                else {
-                   if (table[movimientoX][movimientoY].isBlancas() != this.blancas && !(table[movimientoX][movimientoY] instanceof  Rey)) {
+                   if (table[movimientoX][movimientoY].isRoja() != this.roja && !(table[movimientoX][movimientoY] instanceof  Rey)) {
                        piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                        table[movimientoX][movimientoY] = table[posicionX][posicionY];
                        table[posicionX][posicionY] = null;
@@ -236,7 +236,7 @@ public class Rey extends Pieza{
                    return 0;
                }
                else {
-                   if (table[movimientoX][movimientoY].isBlancas() != this.blancas && !(table[movimientoX][movimientoY] instanceof  Rey)) {
+                   if (table[movimientoX][movimientoY].isRoja() != this.roja && !(table[movimientoX][movimientoY] instanceof  Rey)) {
                        piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                        table[movimientoX][movimientoY] = table[posicionX][posicionY];
                        table[posicionX][posicionY] = null;
@@ -262,7 +262,7 @@ public class Rey extends Pieza{
         return false;
     }
 
-    public  boolean jaqueMateSinMovimientos(Tablero tablero, Boolean blanco) {
+    public  boolean reySinMovimiento(Tablero tablero, Boolean blanco) {
       int contador = 0;
       int posicionOriginalX= posicionX;
       int posicionOriginalY=posicionY;
@@ -286,7 +286,7 @@ int movimientoY;
               // el else if es para si puede comer una pieza y se comprobara si añade mas uno al contador
           }
           else {
-              if (table[posicionX - 1][posicionY].isBlancas() != this.blancas && !(table[posicionX - 1][posicionY] instanceof Rey)) {
+              if (table[posicionX - 1][posicionY].isRoja() != this.roja && !(table[posicionX - 1][posicionY] instanceof Rey)) {
                   movimientoX = posicionX - 1;
                   movimientoY = posicionY;
                   comida = tablero.obtenerPieza(posicionX - 1, posicionY);
@@ -322,7 +322,7 @@ int movimientoY;
               }
               regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
           } else {
-              if (table[posicionX + 1][posicionY].isBlancas() != this.blancas && !(table[posicionX + 1][posicionY] instanceof Rey)) {
+              if (table[posicionX + 1][posicionY].isRoja() != this.roja && !(table[posicionX + 1][posicionY] instanceof Rey)) {
                   movimientoX = posicionX + 1;
                   movimientoY = posicionY;
                   comida = tablero.obtenerPieza(posicionX + 1, posicionY);
@@ -364,7 +364,7 @@ int movimientoY;
                 }
                 regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
             } else {
-                if (table[posicionX][posicionY - 1].isBlancas() != this.blancas && !(table[posicionX][posicionY - 1] instanceof Rey)) {
+                if (table[posicionX][posicionY - 1].isRoja() != this.roja && !(table[posicionX][posicionY - 1] instanceof Rey)) {
                     movimientoX = posicionX;
                     movimientoY = posicionY - 1;
                     comida = tablero.obtenerPieza(posicionX, posicionY - 1);
@@ -406,7 +406,7 @@ int movimientoY;
               regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
 
           } else {
-              if (table[posicionX][posicionY + 1].isBlancas() != this.blancas && !(table[posicionX][posicionY + 1] instanceof Rey)) {
+              if (table[posicionX][posicionY + 1].isRoja() != this.roja && !(table[posicionX][posicionY + 1] instanceof Rey)) {
                   movimientoX = posicionX;
                   movimientoY = posicionY + 1;
                   comida = tablero.obtenerPieza(posicionX, posicionY + 1);
@@ -450,7 +450,7 @@ int movimientoY;
                 regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
 
             } else {
-                if (table[posicionX - 1][posicionY + 1].isBlancas() != this.blancas && !(table[posicionX - 1][posicionY + 1] instanceof Rey)) {
+                if (table[posicionX - 1][posicionY + 1].isRoja() != this.roja && !(table[posicionX - 1][posicionY + 1] instanceof Rey)) {
                     movimientoX = posicionX - 1;
                     movimientoY = posicionY + 1;
                     comida = tablero.obtenerPieza(posicionX - 1, posicionY + 1);
@@ -492,7 +492,7 @@ int movimientoY;
                   regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
 
               } else {
-                  if (table[posicionX - 1][posicionY - 1].isBlancas() != this.blancas && !(table[posicionX - 1][posicionY - 1] instanceof Rey)) {
+                  if (table[posicionX - 1][posicionY - 1].isRoja() != this.roja && !(table[posicionX - 1][posicionY - 1] instanceof Rey)) {
                       movimientoX = posicionX - 1;
                       movimientoY = posicionY - 1;
                       comida = tablero.obtenerPieza(posicionX - 1, posicionY - 1);
@@ -534,7 +534,7 @@ int movimientoY;
                  regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
 
              } else {
-                 if (table[posicionX + 1][posicionY + 1].isBlancas() != this.blancas && !(table[posicionX + 1][posicionY + 1] instanceof Rey)) {
+                 if (table[posicionX + 1][posicionY + 1].isRoja() != this.roja && !(table[posicionX + 1][posicionY + 1] instanceof Rey)) {
                      movimientoX = posicionX + 1;
                      movimientoY = posicionY + 1;
                      comida = tablero.obtenerPieza(posicionX + 1, posicionY + 1);
@@ -577,7 +577,7 @@ int movimientoY;
                  regresarMovimiento(tablero, posicionOriginalX, posicionOriginalY);
 
              } else {
-                 if (table[posicionX + 1][posicionY - 1].isBlancas() != this.blancas && !(table[posicionX + 1][posicionY - 1] instanceof Rey)) {
+                 if (table[posicionX + 1][posicionY - 1].isRoja() != this.roja && !(table[posicionX + 1][posicionY - 1] instanceof Rey)) {
                      movimientoX = posicionX + 1;
                      movimientoY = posicionY - 1;
                      comida = tablero.obtenerPieza(posicionX + 1, posicionY - 1);
@@ -611,6 +611,15 @@ int movimientoY;
   }
 
 
+    public void imprimirRey(){
+        if (this.roja) {
+            System.out.print(red + "♔" + reset);
+        }
+        else {
+            System.out.print(green + "♔" + reset);
+        }
+    }
+
 
 //--------------------espacio abajo
 public int  comerRey(Tablero tablero, int movimientoX,int movimientoY) {
@@ -622,7 +631,7 @@ public int  comerRey(Tablero tablero, int movimientoX,int movimientoY) {
     if (table[movimientoX][movimientoY] != null) {
         if (movimientoX == posicionX) {
             if (movimientoY == posicionY - 1 || movimientoY == posicionY + 1) {
-                if (table[movimientoX][movimientoY].isBlancas() != this.blancas) {
+                if (table[movimientoX][movimientoY].isRoja() != this.roja) {
                     piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                     table[movimientoX][movimientoY] = table[posicionX][posicionY];
                     table[posicionX][posicionY] = null;
@@ -645,7 +654,7 @@ public int  comerRey(Tablero tablero, int movimientoX,int movimientoY) {
         //----------------vertical-------------------------------
         else if (posicionY == movimientoY) {
             if (movimientoX == posicionX - 1 || movimientoX == posicionX + 1) {
-                if (table[movimientoX][movimientoY].isBlancas() != this.blancas) {
+                if (table[movimientoX][movimientoY].isRoja() != this.roja) {
                     piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                     table[movimientoX][movimientoY] = table[posicionX][posicionY];
                     table[posicionX][posicionY] = null;
@@ -670,7 +679,7 @@ public int  comerRey(Tablero tablero, int movimientoX,int movimientoY) {
         //----------------------------------diagonal arriba derecha------------------------------------//
 
         else if (posicionX -1== movimientoX && posicionY+1==movimientoY) {
-            if (table[movimientoX][movimientoY].isBlancas() != this.blancas) {
+            if (table[movimientoX][movimientoY].isRoja() != this.roja) {
                 piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                 table[movimientoX][movimientoY] = table[posicionX][posicionY];
                 table[posicionX][posicionY] = null;
@@ -694,7 +703,7 @@ public int  comerRey(Tablero tablero, int movimientoX,int movimientoY) {
 
         //-----------------------------diagonal arriba izquierda---------------------------------------------------//
         else if (posicionX -1== movimientoX && posicionY+1==movimientoY) {
-            if (table[movimientoX][movimientoY].isBlancas() != this.blancas) {
+            if (table[movimientoX][movimientoY].isRoja() != this.roja) {
                 piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                 table[movimientoX][movimientoY] = table[posicionX][posicionY];
                 table[posicionX][posicionY] = null;
@@ -718,7 +727,7 @@ public int  comerRey(Tablero tablero, int movimientoX,int movimientoY) {
 
         //--------------------------diagonal abajo derecha--------------------------------------------------------//
         else if (posicionX -1== movimientoX && posicionY+1==movimientoY) {
-            if (table[movimientoX][movimientoY].isBlancas() != this.blancas) {
+            if (table[movimientoX][movimientoY].isRoja() != this.roja) {
                 piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                cambiarPosicion(tablero,movimientoX,movimientoY);
                 if (table[movimientoX][movimientoY].confirmarJaque(tablero, movimientoX, movimientoY)) {// es verdad si luego de mover la pieza aun seguimos en jacke, entonces abajo debemos regresar el movimiento
@@ -740,7 +749,7 @@ public int  comerRey(Tablero tablero, int movimientoX,int movimientoY) {
 
         //----------------------------diagonal abajo izquierda------------------------------------------------//
         else if (posicionX -1== movimientoX && posicionY+1==movimientoY) {
-            if (table[movimientoX][movimientoY].isBlancas() != this.blancas) {
+            if (table[movimientoX][movimientoY].isRoja() != this.roja) {
                 piezaComida = tablero.obtenerPieza(movimientoX, movimientoY);
                cambiarPosicionPieza(tablero,movimientoX,movimientoY);
                 if (table[movimientoX][movimientoY].confirmarJaque(tablero, movimientoX, movimientoY)) {// es verdad si luego de mover la pieza aun seguimos en jacke, entonces abajo debemos regresar el movimiento
@@ -763,6 +772,14 @@ public int  comerRey(Tablero tablero, int movimientoX,int movimientoY) {
     }
     return 3;
 }
+
+
+
+    public String mostrarDatosRey(){
+
+
+        return toString() + ",Rey";
+    }
 }
 
 

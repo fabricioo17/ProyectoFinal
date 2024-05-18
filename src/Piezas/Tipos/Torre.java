@@ -11,7 +11,7 @@ public class Torre extends Pieza implements MovimientoHorizontalVertical {
     }
     public void imprimirTorre(){
 
-        if (this.blancas) {
+        if (this.roja) {
             System.out.print(red + "♖" + reset);
         }
         else {
@@ -47,5 +47,11 @@ public class Torre extends Pieza implements MovimientoHorizontalVertical {
     @Override
     public boolean protegerRey(Tablero tablero, int posicionX, int posicionY, boolean blanco) {
         return false;
+    }
+
+    public String mostrarDatosTorre(){
+
+
+        return toString() + ",Torre";
     }
 }

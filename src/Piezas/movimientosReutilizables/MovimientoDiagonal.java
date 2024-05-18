@@ -11,7 +11,7 @@ public interface MovimientoDiagonal {
         Pieza piezaComida;
         Pieza  [][] table= tablero.getTable();
         Pieza actual= table[posicionX][posicionY];
-        Rey rey = tablero.obtenerPiezaReyBlanco(table[posicionOriginalX][posicionOriginalY].isBlancas());
+        Rey rey = tablero.obtenerPiezaReyBlanco(table[posicionOriginalX][posicionOriginalY].isRoja());
         int posicionReyX=rey.getPosicionX();
         int posicionReyY= rey.getPosicionY();
         if (tablero.obtenerPieza(posicionX,posicionY)!= tablero.obtenerPieza(movimientoX,movimientoY)) {
@@ -32,7 +32,7 @@ public interface MovimientoDiagonal {
                         }
                         //-----------------------comer pieza--------------------------------//
                         if ((i == movimientoX && j == movimientoY) && table[movimientoX][movimientoY] != null) { // si el movimiento concuerda justo donde se encuetra una pieza(es el limite de hasta donde puede moverse la pieza )
-                            if (table[movimientoX][movimientoY].isBlancas() != table[posicionX][posicionY].isBlancas()) {
+                            if (table[movimientoX][movimientoY].isRoja() != table[posicionX][posicionY].isRoja()) {
                                         piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                                        actual.cambiarPosicionPieza(tablero,movimientoX,movimientoY);
                                        if (actual.confirmarJaque(tablero,posicionReyX,posicionReyY)){
@@ -68,7 +68,7 @@ public interface MovimientoDiagonal {
                        //--------------------comer pieza--------------------------------------//
                         if ((i == movimientoX && j == movimientoY) && table[movimientoX][movimientoY] != null) { // si el movimineto conuerda con un lugar donde no sea nulo, identificara el dueño de la pieza y si es de otro se la come
 
-                            if (table[movimientoX][movimientoY].isBlancas() != table[posicionX][posicionY].isBlancas()) {
+                            if (table[movimientoX][movimientoY].isRoja() != table[posicionX][posicionY].isRoja()) {
 
                                 piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                                 actual.cambiarPosicionPieza(tablero,movimientoX,movimientoY);
@@ -110,7 +110,7 @@ public interface MovimientoDiagonal {
 
                         //----------------comer pieza----------------------------//
                         if ((i == movimientoX && j == movimientoY) && table[movimientoX][movimientoY] != null) { // si el movimineto conuerda con un lugar donde no sea nulo, identificara el dueño de la pieza y si es de otro se la come
-                            if (table[movimientoX][movimientoY].isBlancas() != table[posicionX][posicionY].isBlancas()) {
+                            if (table[movimientoX][movimientoY].isRoja() != table[posicionX][posicionY].isRoja()) {
 
                                 piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                                 actual.cambiarPosicionPieza(tablero,movimientoX,movimientoY);
@@ -151,7 +151,7 @@ public interface MovimientoDiagonal {
                         }
 
                         if ((i == movimientoX && j == movimientoY) && table[movimientoX][movimientoY] != null) { // si el movimineto conuerda con un lugar donde no sea nulo, identificara el dueño de la pieza y si es de otro se la come
-                            if (table[movimientoX][movimientoY].isBlancas() != table[posicionX][posicionY].isBlancas()) {
+                            if (table[movimientoX][movimientoY].isRoja() != table[posicionX][posicionY].isRoja()) {
 
                                 piezaComida=tablero.obtenerPieza(movimientoX,movimientoY);
                                 actual.cambiarPosicionPieza(tablero,movimientoX,movimientoY);
@@ -200,7 +200,7 @@ public interface MovimientoDiagonal {
                     }
                     //-----------------------comer pieza--------------------------------//
                    else  { // si el movimiento concuerda justo donde se encuetra una pieza(es el limite de hasta donde puede moverse la pieza )
-                        if (table[i][j].isBlancas() != table[posicionX][posicionY].isBlancas()) {
+                        if (table[i][j].isRoja() != table[posicionX][posicionY].isRoja()) {
                             piezaComida=tablero.obtenerPieza(i,j);
                             actual.cambiarPosicionPieza(tablero,i,j);
                             if (actual.confirmarJaque(tablero,posicionReyX,posicionReyY)==false){
@@ -229,7 +229,7 @@ public interface MovimientoDiagonal {
             }
             //-----------------------comer pieza--------------------------------//
             else  { // si el movimiento concuerda justo donde se encuetra una pieza(es el limite de hasta donde puede moverse la pieza )
-                if (table[i][j].isBlancas() != table[posicionX][posicionY].isBlancas()) {
+                if (table[i][j].isRoja() != table[posicionX][posicionY].isRoja()) {
                     piezaComida=tablero.obtenerPieza(i,j);
                     actual.cambiarPosicionPieza(tablero,i,j);
                     if (actual.confirmarJaque(tablero,posicionReyX,posicionReyY)==false){
@@ -259,7 +259,7 @@ public interface MovimientoDiagonal {
             }
             //-----------------------comer pieza--------------------------------//
             else  { // si el movimiento concuerda justo donde se encuetra una pieza(es el limite de hasta donde puede moverse la pieza )
-                if (table[i][j].isBlancas() != table[posicionX][posicionY].isBlancas()) {
+                if (table[i][j].isRoja() != table[posicionX][posicionY].isRoja()) {
                     piezaComida=tablero.obtenerPieza(i,j);
                     actual.cambiarPosicionPieza(tablero,i,j);
                     if (actual.confirmarJaque(tablero,posicionReyX,posicionReyY)==false){
@@ -289,7 +289,7 @@ public interface MovimientoDiagonal {
             }
             //-----------------------comer pieza--------------------------------//
             else  { // si el movimiento concuerda justo donde se encuetra una pieza(es el limite de hasta donde puede moverse la pieza )
-                if (table[i][j].isBlancas() != table[posicionX][posicionY].isBlancas()) {
+                if (table[i][j].isRoja() != table[posicionX][posicionY].isRoja()) {
                     piezaComida=tablero.obtenerPieza(i,j);
                     actual.cambiarPosicionPieza(tablero,i,j);
                     if (actual.confirmarJaque(tablero,posicionReyX,posicionReyY)==false){
