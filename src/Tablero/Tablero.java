@@ -2,6 +2,8 @@ package Tablero;
 import utillidades.*;
 import Piezas.Pieza;
 import Piezas.Tipos.*;
+
+import java.util.Arrays;
 import java.util.Scanner;
 public class Tablero {
     private Pieza[][] table;
@@ -32,7 +34,9 @@ int siguienteJugador=0;
           System.out.println(" ");
           imprimirTablero();
             if (detenerJuego(teclado)){
-                PartidaGuardada.guardarPiezas(this);
+                System.out.println("ingresa el nombre con la que la quieres guardar");
+                String nombre=teclado.next();
+                PartidaGuardada.guardarPiezas(this,nombre);
                 break;
             }
             siguienteJugador++;
@@ -64,7 +68,7 @@ int siguienteJugador=0;
 
     public void  startTablero(){
         table[0][0] = new Torre(true,0,0) ;
-        table[0][1]=new Caballo(true,0,1);
+       table[0][1]=new Caballo(true,0,1);
         table[0][2]=new Alfil(true,0,2);
         table[0][3] = new Rey(true,0,3) ;
         table[0][4]=new Reina(true,0,4);
@@ -368,8 +372,9 @@ public void vaciarTabla(){
 
 
 public void playGuardada(Scanner teclado){
-    vaciarTabla();
-    PartidaGuardada.cargarPartida(this);
+    System.out.println("ingrese el nombre de la partida");
+    String nombre = teclado.next();
+    PartidaGuardada.cargarPartida(this,nombre);
     int siguienteJugador=0;
     int ganador  ;
     boolean color;
@@ -407,5 +412,10 @@ public boolean detenerJuego(Scanner teclado){
 }
 
 
-
+    @Override
+    public String toString() {
+        return "Tablero{" +
+                "table=" + Arrays.toString(table) +
+                '}';
+    }
 }

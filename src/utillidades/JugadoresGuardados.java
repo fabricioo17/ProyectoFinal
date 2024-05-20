@@ -4,14 +4,14 @@ import Jugadores.Jugador;
 import java.io.*;
 import java.util.Scanner;
 
-public class texto {
+public class JugadoresGuardados {
    final static File fichero = new File("src/Datos.txt");
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
-        Jugador jugador = new Jugador(teclado, true);
+        Jugador jugador = new Jugador(teclado);
         añadirDatos(jugador);
         leerFile();
-        mostrarDatosJugador("5");
+        mostrarDatosJugador("55555");
     }
 
 public static void añadirDatos(  Jugador jugador)  {
@@ -58,7 +58,7 @@ else {
             while (linea !=null){
                 if (linea.startsWith("ID: " + ID)){
                     System.out.println(linea);
-            break;
+                break;
                 }
                 linea=lectura.readLine();
 
@@ -89,6 +89,7 @@ else {
         }
         return false;
     }
+
 
 
 

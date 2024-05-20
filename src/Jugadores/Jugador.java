@@ -8,22 +8,19 @@ public class Jugador {
     String nombre;
     String id;
     LocalDate fecha;
-    Boolean blancas;
 
-    public Jugador(String nombre, String id, boolean blancas) {
+    public Jugador(String nombre, String id) {
         this.nombre = nombre;
         this.id = id;
         this.fecha = LocalDate.now();
-        blancas=blancas;
     }
 
-    public Jugador(Scanner teclado, boolean blancas) {
+    public Jugador(Scanner teclado) {
         System.out.println("ingrese su nombre");
         this.nombre = teclado.next();
         System.out.println("ingrese un identificador");
         this.id = teclado.next();
         this.fecha = LocalDate.now();
-        blancas=blancas;
     }
 
 

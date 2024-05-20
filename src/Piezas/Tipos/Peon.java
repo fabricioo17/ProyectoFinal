@@ -334,7 +334,11 @@ public class Peon extends Pieza {
                 }
         }
 
+    public String mostrarDatosPeon(){
 
+
+        return toString() + ",Peon";
+    }
 
 
 
