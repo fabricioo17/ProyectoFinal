@@ -23,9 +23,6 @@ cargarPiezas(tablero,"pruebaultimo");
         cargarPiezas(nuevo,nombre);
         borrarFichero();
     }
-    public static Tablero crearTalblero(){
-       return new Tablero();
-    }
 
 
     public static void guardarPiezas(Tablero tablero,String nombre){
@@ -114,7 +111,7 @@ if (confirmarExistenciaFichero(nombre)) {
         }
         lector.close();
     } catch (Exception e) {
-        System.out.println("no se logro gargar la partida completa ");
+        System.out.println("no xiste esa partida");
     }
 }
     //-------------ahora borrare lap partida guarada ---------- por si quieren volver a guardar

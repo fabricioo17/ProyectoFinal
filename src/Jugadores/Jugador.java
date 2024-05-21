@@ -8,11 +8,15 @@ public class Jugador {
     String nombre;
     String id;
     LocalDate fecha;
-
-    public Jugador(String nombre, String id) {
-        this.nombre = nombre;
+    int partidasJugadas=0;
+    int partidasGanadas=0;
+    double porcentaje=0;
+    public Jugador(String nombre,String id, int partidasGanadas,int partidasJugadas, double porcentaje) {
+        this.nombre =nombre;
         this.id = id;
-        this.fecha = LocalDate.now();
+        this.partidasGanadas=partidasGanadas;
+        this.partidasJugadas=partidasJugadas;
+        this.porcentaje= porcentaje;
     }
 
     public Jugador(Scanner teclado) {
@@ -23,9 +27,40 @@ public class Jugador {
         this.fecha = LocalDate.now();
     }
 
+    public double getPorcentaje() {
+        return porcentaje;
+    }
+
+    public void setPorcentaje(double porcentaje) {
+        this.porcentaje = porcentaje;
+    }
 
     public String getNombre() {
         return nombre;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getPartidasJugadas() {
+        return partidasJugadas;
+    }
+
+    public void setPartidasJugadas(int partidasJugadas) {
+        this.partidasJugadas = partidasJugadas;
+    }
+
+    public int getPartidasGanadas() {
+        return partidasGanadas;
+    }
+
+    public void setPartidasGanadas(int partidasGanadas) {
+        this.partidasGanadas = partidasGanadas;
     }
 
     public void setNombre(String nombre) {
@@ -40,7 +75,12 @@ public class Jugador {
         this.id = id;
     }
 
+public  int aumentarPartidaJugada(){
+    setPartidasJugadas(partidasJugadas+1);
 
+        return partidasJugadas;
+
+}
 
 
 }

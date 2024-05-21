@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Jugador jugador1;
         int turno=1;
         Scanner teclado = new Scanner(System.in);
         Tablero tablero = new Tablero();
@@ -23,6 +24,8 @@ public class Main {
                 if (JugadoresGuardados.verificarExistenciaJugador(ID)){
                     System.out.println(" bienvenido jugador: ");
                     JugadoresGuardados.mostrarDatosJugador(ID);
+                    jugador1=JugadoresGuardados.obtenerJugador(ID);
+                   JugadoresGuardados.modificarUsuario(jugador1);
                 }
                 else {
                     System.out.println(" no existe un usuario con ese ID");
